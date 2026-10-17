@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+node_modules/
+dist/
+**/data/*.sqlite3*
+**/data/outbox/
+task2-inbox-agent/public/app.js
+.pytest_cache/
+evaluation/results/*.tmp

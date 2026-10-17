@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knowledge Brain | Consultant Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F4F0; --surface:#FFFFFF; --ink:#1C2430; --muted:#5B6573; --line:#D5DBD2;
+  --accent:#2443B8; --accent-ink:#FFFFFF; --mark:#FFE27A; --mark-strong:#F5C518;
+  --ok:#1E7A4C; --ok-bg:#E3F2E9; --warn:#9A5B00; --warn-bg:#FCF0D9; --bad:#B3261E; --bad-bg:#FBE4E1;
+  --ui:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --read:"Newsreader",Georgia,"Times New Roman",serif;
+  --r-sm:4px; --r-md:8px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 var(--ui)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button,input,select,textarea{font:inherit;color:inherit}
+.bar{display:flex;align-items:center;gap:24px;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:-.01em;font-size:18px}
+.brand small{font-weight:400;color:var(--muted);margin-left:6px}
+.nav{display:flex;gap:4px}
+.nav a{padding:6px 12px;border-radius:var(--r-sm);text-decoration:none;color:var(--muted)}
+.nav a[aria-current=page]{background:var(--ink);color:#fff}
+.health{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.pill{padding:2px 10px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+.pill.ok{background:var(--ok-bg);border-color:transparent;color:var(--ok)}
+.pill.warn{background:var(--warn-bg);border-color:transparent;color:var(--warn)}
+.pill.bad{background:var(--bad-bg);border-color:transparent;color:var(--bad)}
+main{max-width:1240px;margin:0 auto;padding:28px 24px 64px}
+.banner{padding:12px 16px;border-radius:var(--r-md);margin-bottom:16px;background:var(--warn-bg);color:var(--warn)}
+.banner.bad{background:var(--bad-bg);color:var(--bad)}
+h1{font-size:28px;line-height:1.2;margin:0 0 4px;letter-spacing:-.015em}
+.lede{color:var(--muted);margin:0 0 20px;max-width:68ch}
+.ask{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+.ask textarea{width:100%;min-height:64px;resize:vertical;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface)}
+.btn{border:0;border-radius:var(--r-md);padding:11px 18px;background:var(--accent);color:var(--accent-ink);font-weight:600;cursor:pointer}
+.btn[disabled]{opacity:.55;cursor:progress}
+.btn.quiet{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.small{padding:6px 12px;font-size:14px}
+.opts{display:flex;gap:16px;align-items:center;margin-top:8px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.opts select{border:1px solid var(--line);border-radius:var(--r-sm);padding:3px 6px;background:var(--surface)}
+.examples{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.examples button{border:1px dashed var(--line);background:transparent;border-radius:999px;padding:4px 12px;font-size:14px;color:var(--muted);cursor:pointer}
+.examples button:hover{color:var(--ink);border-style:solid}
+.result{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:28px;margin-top:28px}
+@media (max-width:900px){.result{grid-template-columns:1fr}.ask{grid-template-columns:1fr}}
+.status{display:inline-flex;gap:8px;align-items:center;font-weight:600;padding:4px 12px;border-radius:999px;font-size:14px}
+.status.answered{background:var(--ok-bg);color:var(--ok)}
+.status.partial,.status.insufficient_evidence{background:var(--warn-bg);color:var(--warn)}
+.status.error{background:var(--bad-bg);color:var(--bad)}
+.answer{font-family:var(--read);font-size:19px;line-height:1.6;white-space:pre-wrap;margin:14px 0 10px;max-width:68ch}
+.cite{font-family:var(--ui);font-size:13px;font-weight:700;background:var(--mark);padding:0 5px;border-radius:3px;cursor:pointer;border:0;vertical-align:1px}
+.cite.on,.cite:hover{background:var(--mark-strong)}
+.meta{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.gaps{margin-top:14px;padding:10px 14px;border-left:3px solid var(--warn);background:var(--surface);font-size:15px}
+.rail h2,.panel h2{font-size:16px;margin:0 0 10px}
+.src{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;margin-bottom:10px;transition:box-shadow .15s}
+.src.on{box-shadow:0 0 0 3px var(--mark-strong)}
+.src.uncited{opacity:.62}
+.src header{display:flex;gap:8px;align-items:baseline}
+.src .sid{font-weight:700;font-size:13px;background:var(--mark);padding:0 6px;border-radius:3px}
+.src.uncited .sid{background:var(--paper)}
+.src a.t{font-weight:600;text-decoration:none;color:var(--ink)}
+.src a.t:hover{text-decoration:underline}
+.src .kind{margin-left:auto;font-size:12px;color:var(--muted)}
+.src .sec{font-size:13px;color:var(--muted);margin:2px 0 6px}
+.src blockquote{margin:6px 0 0;font-family:var(--read);font-size:15px;line-height:1.5;background:linear-gradient(transparent 55%,var(--mark) 55%);display:inline}
+.src .snip{font-size:14px;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.src img{display:block;max-width:100%;max-height:180px;margin-top:8px;border:1px solid var(--line);border-radius:var(--r-sm)}
+.more summary{cursor:pointer;color:var(--muted);font-size:14px;padding:6px 0}
+.srow{display:flex;gap:10px;align-items:flex-start;padding:8px 2px;border-top:1px solid var(--line);font-size:14px}
+.srow .sid{font-weight:700;font-size:12px;background:var(--surface);border:1px solid var(--line);padding:0 6px;border-radius:3px}
+.srow small{color:var(--muted)}
+.srow a{color:var(--ink)}
+.empty{color:var(--muted);padding:24px;border:1px dashed var(--line);border-radius:var(--r-md);text-align:left}
+.tabs{display:flex;gap:4px;margin:44px 0 0;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:transparent;padding:10px 14px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+.panel{padding:20px 0}
+.esc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;margin-bottom:12px}
+.esc .q{font-family:var(--read);font-size:18px}
+.esc .why{font-size:14px;color:var(--muted);margin:4px 0 8px}
+.esc form{display:grid;gap:8px;margin-top:10px}
+.esc textarea,.esc input[type=text],.esc input[type=date]{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper)}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-size:14px}
+table{border-collapse:collapse;width:100%;font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);background:var(--paper)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.spinner{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="brand">Consultant Desk <small>Knowledge Brain</small></div>
+  <nav class="nav" aria-label="Apps">
+    <a href="http://localhost:8001/" aria-current="page">Knowledge</a>
+    <a href="http://localhost:3002/">Inbox</a>
+    <a href="http://localhost:8003/">Scope builder</a>
+  </nav>
+  <div class="health" id="health"><span class="pill">Checking service…</span></div>
+</div>
+
+<main>
+  <div id="banners"></div>
+  <h1>Ask the knowledge base</h1>
+  <p class="lede">Answers come only from the Brilliant Directories help centre, its screenshots, and answers approved by your experts. Every claim links to its source; anything not covered goes to the expert queue.</p>
+
+  <form class="ask" id="askForm">
+    <textarea id="q" name="q" aria-label="Your question" placeholder="e.g. How do I refund a member's payment?" required minlength="3" maxlength="2000"></textarea>
+    <button class="btn" id="askBtn" type="submit">Ask</button>
+  </form>
+  <div class="opts">
+    <label>Retrieval <select id="mode"><option value="hybrid">Hybrid (meaning + keywords)</option><option value="vector">Meaning only</option><option value="keyword">Keywords only</option></select></label>
+    <label><input type="checkbox" id="escalate" checked> Send unanswered questions to an expert</label>
+  </div>
+  <div class="examples" id="examples"></div>
+
+  <section class="result" id="result" aria-live="polite">
+    <div><div class="empty">Ask a question to see a grounded answer with its sources.</div></div>
+    <aside class="rail"></aside>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="queue" id="tabQueue">Expert queue</button>
+    <button role="tab" aria-selected="false" data-tab="updates">Content updates</button>
+  </div>
+  <section class="panel" id="panel"></section>
+</main>
+
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const STATUS = {
+  answered: "Answered from sources",
+  partial: "Partly answered — rest sent to an expert",
+  insufficient_evidence: "Not in the knowledge base — sent to an expert",
+  error: "Answer failed",
+};
+const EXAMPLES = [
+  "How do I refund a member's payment?",
+  "Does refunding a payment cancel the member's subscription?",
+  "Which payment gateways are supported and where do I add one?",
+  "How do I set member search results to start in map view?",
+  "How do I import members from a CSV file?",
+];
+let current = null;
+
+async function api(path, opts = {}) {
+  const res = await fetch(path, { headers: { "Content-Type": "application/json" }, ...opts });
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(body?.error?.message ? JSON.stringify(body.error.message) : `HTTP ${res.status}`);
+  return body;
+}
+
+async function loadHealth() {
+  const el = $("#health"), banners = $("#banners");
+  try {
+    const h = await api("/health");
+    const llm = h.llm_provider === "fake" ? `<span class="pill warn">Demo model (fake)</span>`
+      : h.llm_configured ? `<span class="pill ok">Claude ${esc(h.answer_model)}</span>` : `<span class="pill bad">No model key</span>`;
+    el.innerHTML = `<span class="pill">${h.articles_active.toLocaleString()} articles</span><span class="pill">${h.image} screenshots indexed</span>${llm}`;
+    $("#tabQueue").textContent = `Expert queue (${h.open_escalations})`;
+    banners.innerHTML = "";
+    if (!h.llm_configured) banners.innerHTML += `<div class="banner bad">Answers are switched off: ANTHROPIC_API_KEY is not set. Search still works — add the key to .env and restart.</div>`;
+    if (h.llm_provider === "fake") banners.innerHTML += `<div class="banner">Demo mode: answers come from a deterministic stand-in, not Claude. Set LLM_PROVIDER=anthropic for real answers.</div>`;
+    if (!h.articles_active) banners.innerHTML += `<div class="banner">The knowledge base is empty. Open <b>Content updates</b> below and run the first crawl.</div>`;
+  } catch (e) {
+    el.innerHTML = `<span class="pill bad">Service not responding</span>`;
+    banners.innerHTML = `<div class="banner bad">The Knowledge Brain API is not responding (${esc(e.message)}). Start it with ./start.sh.</div>`;
+  }
+}
+
+function renderAnswer(r) {
+  const res = $("#result");
+  const answerHtml = esc(r.answer || r.error || "").replace(/\[(S\d+)\]/g, (_, id) => `<button type="button" class="cite" data-sid="${id}" aria-label="Show source ${id}">${id}</button>`);
+  const gaps = (r.unsupported_points || []).length && r.status !== "answered"
+    ? `<div class="gaps"><b>Not covered by the sources:</b> ${r.unsupported_points.map(esc).join("; ")}${r.escalation_id ? ` — expert task #${r.escalation_id} opened.` : ""}</div>` : "";
+  const u = r.usage || {};
+  const cited = r.sources.filter((x) => x.cited), other = r.sources.filter((x) => !x.cited);
+  res.innerHTML = `
+    <div>
+      <span class="status ${r.status}">${STATUS[r.status] || esc(r.status)}</span>
+      <div class="answer">${answerHtml}</div>
+      ${gaps}
+      <div class="meta"><span>${r.latency_ms} ms</span><span>$${(u.cost_usd || 0).toFixed(4)}</span><span>${esc(r.model)}</span><span>best match ${r.retrieval.top_similarity.toFixed(2)} (gate ${r.retrieval.min_similarity})</span><span>${esc(r.prompt_version)}</span></div>
+    </div>
+    <aside class="rail">
+      <h2>${cited.length ? "Sources used" : "Closest matches"}</h2>
+      ${cited.length ? cited.map(srcCard).join("") : ""}
+      ${other.length ? (cited.length
+        ? `<details class="more"><summary>Also retrieved, not used (${other.length})</summary>${other.map(srcRow).join("")}</details>`
+        : other.map(srcRow).join(""))
+        : (cited.length ? "" : `<div class="empty">No source was relevant enough to use.</div>`)}
+    </aside>`;
+  res.querySelectorAll(".cite").forEach((b) => b.addEventListener("click", () => focusSource(b.dataset.sid)));
+}
+
+function srcCard(s) {
+  const kind = { text: "Article", image: "Screenshot", expert: "Expert answer" }[s.kind] || s.kind;
+  const link = s.url.startsWith("kb://") ? `<span class="t">${esc(s.title)}</span>` : `<a class="t" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>`;
+  return `<article class="src ${s.cited ? "" : "uncited"}" id="src-${s.id}">
+    <header><span class="sid">${s.id}</span>${link}<span class="kind">${kind}${s.cited ? "" : ", not cited"}</span></header>
+    <div class="sec">${esc(s.section)}</div>
+    ${s.supporting_quote ? `<blockquote>${esc(s.supporting_quote)}</blockquote>` : `<div class="snip">${esc(s.snippet)}</div>`}
+    ${s.image_url ? `<img src="${esc(s.image_url)}" alt="Screenshot from ${esc(s.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}
+  </article>`;
+}
+
+function srcRow(s) {
+  const kind = { text: "Article", image: "Screenshot", expert: "Expert answer" }[s.kind] || s.kind;
+  const t = s.url.startsWith("kb://") ? esc(s.title) : `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>`;
+  return `<div class="srow" id="src-${s.id}"><span class="sid">${s.id}</span><span>${t}<br><small>${kind}, ${esc(s.section)}, match ${s.similarity.toFixed(2)}</small></span></div>`;
+}
+
+function focusSource(sid) {
+  document.querySelectorAll(".src.on,.cite.on").forEach((e) => e.classList.remove("on"));
+  const card = $(`#src-${sid}`);
+  if (card) { card.classList.add("on"); card.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+  document.querySelectorAll(`.cite[data-sid="${sid}"]`).forEach((e) => e.classList.add("on"));
+}
+
+$("#askForm").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const q = $("#q").value.trim();
+  if (q.length < 3) return;
+  const btn = $("#askBtn");
+  btn.disabled = true; btn.innerHTML = `<span class="spinner"></span> Searching`;
+  try {
+    current = await api("/query", { method: "POST", body: JSON.stringify({ question: q, retrieval_mode: $("#mode").value, create_escalation: $("#escalate").checked, requester: "knowledge-chat" }) });
+    renderAnswer(current);
+    if (current.escalation_id) { loadHealth(); if (activeTab === "queue") renderQueue(); }
+  } catch (e) {
+    $("#result").innerHTML = `<div><span class="status error">Answer failed</span><div class="answer">${esc(e.message)}</div></div><aside></aside>`;
+  } finally { btn.disabled = false; btn.textContent = "Ask"; }
+});
+$("#q").addEventListener("keydown", (e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) $("#askForm").requestSubmit(); });
+$("#examples").innerHTML = EXAMPLES.map((x) => `<button type="button">${esc(x)}</button>`).join("");
+$("#examples").addEventListener("click", (e) => { if (e.target.tagName === "BUTTON") { $("#q").value = e.target.textContent; $("#askForm").requestSubmit(); } });
+
+// ---------------------------------------------------------------- panels
+let activeTab = "queue";
+document.querySelectorAll(".tabs button").forEach((b) => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-selected", x === b));
+  activeTab = b.dataset.tab; activeTab === "queue" ? renderQueue() : renderUpdates();
+}));
+
+async function renderQueue() {
+  const panel = $("#panel");
+  const { escalations } = await api("/escalations?status=open");
+  if (!escalations.length) { panel.innerHTML = `<div class="empty">No open questions. When the knowledge base can't answer something, it lands here for an expert.</div>`; return; }
+  panel.innerHTML = escalations.map((e) => `
+    <div class="esc" data-id="${e.id}">
+      <div class="q">${esc(e.question)}</div>
+      <div class="why">#${e.id} from ${esc(e.requester || "unknown")} on ${esc(e.created_at)} — ${esc(e.reason)}</div>
+      ${e.evidence.length ? `<div class="row">Closest articles: ${[...new Map(e.evidence.map((x) => [x.url, x])).values()].slice(0, 3).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>`).join(", ")}</div>` : ""}
+      <form>
+        <textarea name="answer" rows="3" placeholder="Write the approved answer" required minlength="3"></textarea>
+        <div class="row">
+          <label><input type="radio" name="scope" value="general" checked> Reusable product fact (add to knowledge base)</label>
+          <label><input type="radio" name="scope" value="customer_specific"> Only for this customer</label>
+        </div>
+        <div class="row">
+          <label>Approved by <input type="text" name="by" required placeholder="Your name"></label>
+          <label>Stop using after <input type="date" name="expires"></label>
+          <label>Supporting link <input type="text" name="url" placeholder="optional URL"></label>
+        </div>
+        <div class="row"><button class="btn small">Approve answer</button><button class="btn quiet small" type="button" data-dismiss>Dismiss</button></div>
+      </form>
+    </div>`).join("");
+  panel.querySelectorAll(".esc").forEach((card) => {
+    const id = card.dataset.id, form = $("form", card);
+    form.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const f = new FormData(form);
+      try {
+        await api(`/escalations/${id}/resolve`, { method: "POST", body: JSON.stringify({
+          answer: f.get("answer"), resolved_by: f.get("by"), scope: f.get("scope"),
+          expires_at: f.get("expires") || null, supporting_url: f.get("url") || null }) });
+        renderQueue(); loadHealth();
+      } catch (e) { alert(`Could not approve: ${e.message}`); }
+    });
+    $("[data-dismiss]", card).addEventListener("click", async () => { await api(`/escalations/${id}/dismiss`, { method: "POST" }); renderQueue(); loadHealth(); });
+  });
+}
+
+async function renderUpdates() {
+  const panel = $("#panel");
+  const [{ runs }, status] = await Promise.all([api("/ingestion/runs"), api("/ingestion/status")]);
+  const pages = Object.entries(status.pages).map(([k, v]) => `<span class="pill">${esc(k)}: ${v}</span>`).join(" ");
+  panel.innerHTML = `
+    <div class="row" style="margin-bottom:14px">
+      <button class="btn small" id="runInc" ${status.running ? "disabled" : ""}>${status.running ? "Update running…" : "Check for updates now"}</button>
+      <label>or pilot crawl of <input type="number" id="pilot" min="1" value="15" style="width:70px"> articles</label>
+      <button class="btn quiet small" id="runPilot" ${status.running ? "disabled" : ""}>Run pilot</button>
+      <span style="margin-left:auto">${pages}</span>
+    </div>
+    ${runs.length ? `<table><thead><tr><th>Run</th><th>Mode</th><th>Status</th><th>Started (UTC)</th><th class="num">New</th><th class="num">Changed</th><th class="num">Unchanged</th><th class="num">Removed</th><th class="num">Failed</th><th class="num">Seconds</th><th></th></tr></thead><tbody>
+    ${runs.map((r) => `<tr><td>#${r.id}</td><td>${esc(r.mode)}</td><td>${esc(r.status)}</td><td>${esc(r.started_at)}</td>
+      <td class="num">${r.counts.new ?? "–"}</td><td class="num">${r.counts.changed ?? "–"}</td><td class="num">${r.counts.unchanged ?? "–"}</td>
+      <td class="num">${r.counts.removed ?? "–"}</td><td class="num">${r.counts.failed ?? "–"}</td><td class="num">${r.counts.duration_s ?? "–"}</td>
+      <td>${r.status === "completed" && (r.counts.changed || r.counts.new || r.counts.removed) ? `<button class="btn quiet small" data-rb="${r.id}">Roll back</button>` : ""}</td></tr>`).join("")}
+    </tbody></table>` : `<div class="empty">No crawl has run yet. Start with a pilot of 15 articles, then run a full update.</div>`}
+    ${status.recent_failures.length ? `<h2 style="font-size:16px;margin-top:20px">Pages that failed</h2><table><tbody>${status.recent_failures.map((f) => `<tr><td><a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.url.split("/").pop())}</a></td><td>${esc(f.last_error)}</td><td class="num">${f.attempts} tries</td></tr>`).join("")}</tbody></table>` : ""}`;
+  const start = async (body) => { await api("/ingestion/run", { method: "POST", body: JSON.stringify(body) }); pollRun(); };
+  $("#runInc")?.addEventListener("click", () => start({ mode: "incremental" }));
+  $("#runPilot")?.addEventListener("click", () => start({ mode: "incremental", limit: Number($("#pilot").value) || 15 }));
+  panel.querySelectorAll("[data-rb]").forEach((b) => b.addEventListener("click", async () => {
+    if (!confirm(`Roll back run #${b.dataset.rb}? Articles changed in that run return to their previous version.`)) return;
+    await api(`/ingestion/runs/${b.dataset.rb}/rollback`, { method: "POST" }); renderUpdates(); loadHealth();
+  }));
+  if (status.running) setTimeout(() => activeTab === "updates" && renderUpdates(), 3000);
+}
+function pollRun() { renderUpdates(); loadHealth(); }
+
+loadHealth();
+renderQueue().catch(() => {});
+setInterval(loadHealth, 20000);
+</script>
+</body>
+</html>
