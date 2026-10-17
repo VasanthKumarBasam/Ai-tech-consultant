@@ -98,7 +98,7 @@ async def test_failure_is_isolated_and_resumes_next_run(services, site):
 
 async def test_interrupted_run_is_marked_and_pending_pages_resume(services, site):
     # simulate a crash: a run row left 'running' and a page left 'pending'
-    services.db.execute("INSERT INTO runs(mode,status) VALUES('incremental','running')")
+    services.db.execute("INSERT INTO runs(mode,status,started_at) VALUES('incremental','running',datetime('now','-1 hour'))")
     services.db.execute("INSERT INTO pages(url,status,lastmod) VALUES(?, 'pending', '2026-09-01T10:00:00Z')", (REFUND,))
     r = await services.pipeline.run("incremental")
     assert services.db.one("SELECT status FROM runs WHERE id=1")["status"] == "interrupted"
@@ -143,3 +143,10 @@ async def test_retrieval_modes_find_the_right_article(services, mode):
     await services.pipeline.run("incremental")
     hits = retrieve(services.store, "Add New Payment Gateway drop-down Stripe", mode=mode, top_k=3)
     assert hits and hits[0].url == GATEWAY
+
+
+async def test_concurrent_run_in_another_process_is_refused(services):
+    from kb.ingestion.pipeline import RunInProgress
+    services.db.execute("INSERT INTO runs(mode,status,heartbeat_at) VALUES('full','running',datetime('now'))")
+    with pytest.raises(RunInProgress):
+        await services.pipeline.run("incremental")

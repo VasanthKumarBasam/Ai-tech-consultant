@@ -10,11 +10,13 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-try:  # optional: load ../.env when present
+try:  # optional: load ../.env when present (never under pytest, so tests don't depend on local settings)
+    import sys
+
     from dotenv import load_dotenv
 
-    _ROOT = Path(__file__).resolve().parents[2]
-    load_dotenv(_ROOT / ".env")
+    if "pytest" not in sys.modules:
+        load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 except Exception:  # pragma: no cover - dotenv is optional
     pass
 
@@ -52,6 +54,8 @@ class Settings:
     # storage
     db_path: Path = field(default_factory=lambda: Path(os.getenv("KB_DB_PATH", TASK_DIR / "data" / "kb.sqlite3")))
 
+    escalated_cases_path: Path = field(default_factory=lambda: Path(os.getenv("KB_ESCALATED_CASES", TASK_DIR / "evaluation" / "escalated_cases.jsonl")))
+
     # source
     sitemap_url: str = os.getenv(
         "KB_SITEMAP_URL", "https://support.brilliantdirectories.com/support/sitemap.xml"
@@ -77,6 +81,7 @@ class Settings:
     images_enabled: bool = _bool("KB_IMAGES_ENABLED", True)
     image_max_per_article: int = int(os.getenv("KB_IMAGE_MAX_PER_ARTICLE", "12"))
     image_min_bytes: int = int(os.getenv("KB_IMAGE_MIN_BYTES", "4000"))
+    vision_concurrency: int = int(os.getenv("KB_VISION_CONCURRENCY", "6"))
     image_max_bytes: int = int(os.getenv("KB_IMAGE_MAX_BYTES", str(4_500_000)))
 
     # chunking
@@ -112,9 +117,11 @@ class Settings:
     api_key: str | None = os.getenv("KB_API_KEY") or None  # if set, clients must send X-API-Key
     daily_schedule_cron: str | None = os.getenv("KB_DAILY_CRON", "0 2 * * *") or None
     scheduler_enabled: bool = _bool("KB_SCHEDULER_ENABLED", False)
+    scheduler_timezone: str = os.getenv("KB_SCHEDULER_TZ", "UTC")  # explicit: avoids tzlocal failures on legacy zone names
 
     def __post_init__(self) -> None:
         self.db_path = Path(self.db_path)
+        self.escalated_cases_path = Path(self.escalated_cases_path)
 
     def ensure_dirs(self) -> None:
         self.db_path.parent.mkdir(parents=True, exist_ok=True)

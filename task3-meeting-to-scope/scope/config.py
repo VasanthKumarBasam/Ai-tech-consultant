@@ -6,10 +6,13 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-try:
+try:  # never under pytest, so tests don't depend on local settings
+    import sys
+
     from dotenv import load_dotenv
 
-    load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+    if "pytest" not in sys.modules:
+        load_dotenv(Path(__file__).resolve().parents[2] / ".env")
 except Exception:  # pragma: no cover
     pass
 

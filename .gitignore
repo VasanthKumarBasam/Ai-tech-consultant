@@ -9,3 +9,6 @@ dist/
 task2-inbox-agent/public/app.js
 .pytest_cache/
 evaluation/results/*.tmp
+logs/
+**/data/sent/
+**/data/*.sqlite3*

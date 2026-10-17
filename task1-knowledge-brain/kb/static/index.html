@@ -304,7 +304,7 @@ async function renderUpdates() {
       <span style="margin-left:auto">${pages}</span>
     </div>
     ${runs.length ? `<table><thead><tr><th>Run</th><th>Mode</th><th>Status</th><th>Started (UTC)</th><th class="num">New</th><th class="num">Changed</th><th class="num">Unchanged</th><th class="num">Removed</th><th class="num">Failed</th><th class="num">Seconds</th><th></th></tr></thead><tbody>
-    ${runs.map((r) => `<tr><td>#${r.id}</td><td>${esc(r.mode)}</td><td>${esc(r.status)}</td><td>${esc(r.started_at)}</td>
+    ${runs.map((r) => `<tr><td>#${r.id}</td><td>${esc(r.mode)}</td><td>${esc(r.status)}${r.error ? `<br><small style="color:var(--bad)">${esc(r.error)}</small>` : ""}</td><td>${esc(r.started_at)}</td>
       <td class="num">${r.counts.new ?? "–"}</td><td class="num">${r.counts.changed ?? "–"}</td><td class="num">${r.counts.unchanged ?? "–"}</td>
       <td class="num">${r.counts.removed ?? "–"}</td><td class="num">${r.counts.failed ?? "–"}</td><td class="num">${r.counts.duration_s ?? "–"}</td>
       <td>${r.status === "completed" && (r.counts.changed || r.counts.new || r.counts.removed) ? `<button class="btn quiet small" data-rb="${r.id}">Roll back</button>` : ""}</td></tr>`).join("")}

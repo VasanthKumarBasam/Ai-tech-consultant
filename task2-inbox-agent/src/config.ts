@@ -3,7 +3,8 @@ import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 
 export const TASK_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-dotenv.config({ path: path.resolve(TASK_DIR, "..", ".env"), quiet: true } as dotenv.DotenvConfigOptions);
+// tests run against explicit settings, never the local .env
+if (!process.env.VITEST) dotenv.config({ path: path.resolve(TASK_DIR, "..", ".env"), quiet: true } as dotenv.DotenvConfigOptions);
 
 const num = (v: string | undefined, d: number) => (v === undefined || v === "" ? d : Number(v));
 

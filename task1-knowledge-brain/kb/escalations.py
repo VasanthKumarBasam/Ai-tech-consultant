@@ -13,11 +13,8 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .config import TASK_DIR
 from .db import Database
 from .retrieval.store import ChunkStore
-
-ESCALATED_CASES = TASK_DIR / "evaluation" / "escalated_cases.jsonl"
 
 
 def normalize_question(q: str) -> str:
@@ -25,9 +22,10 @@ def normalize_question(q: str) -> str:
 
 
 class Escalations:
-    def __init__(self, db: Database, store: ChunkStore):
+    def __init__(self, db: Database, store: ChunkStore, cases_path: Path | None = None):
         self.db = db
         self.store = store
+        self.cases_path = cases_path
 
     def create(self, question: str, reason: str, context: str | None = None, evidence: list[dict] | None = None,
                requester: str | None = None) -> dict:
@@ -92,7 +90,7 @@ class Escalations:
                    expires_at=?, expert_id=? WHERE id=?""",
             (resolved_by, answer, scope, expires_at, expert_id, eid),
         )
-        self._append_eval_case(esc, answer, scope)
+        self._append_eval_case(self.cases_path, esc, answer, scope)
         return self.get(eid)
 
     def dismiss(self, eid: int, resolved_by: str, note: str = "") -> dict:
@@ -103,10 +101,12 @@ class Escalations:
         return self.get(eid)
 
     @staticmethod
-    def _append_eval_case(esc: dict, answer: str, scope: str) -> None:
+    def _append_eval_case(path: Path | None, esc: dict, answer: str, scope: str) -> None:
+        if path is None:
+            return
         try:
-            ESCALATED_CASES.parent.mkdir(parents=True, exist_ok=True)
-            with ESCALATED_CASES.open("a") as f:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with path.open("a") as f:
                 f.write(json.dumps({
                     "id": f"ESC-{esc['id']}", "question": esc["question"], "type": "escalated",
                     "expected_status": "answered" if scope == "general" else "insufficient_evidence",

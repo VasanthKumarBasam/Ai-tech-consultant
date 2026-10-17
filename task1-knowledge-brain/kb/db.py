@@ -110,6 +110,7 @@ CREATE TABLE IF NOT EXISTS runs (
     mode TEXT NOT NULL,
     status TEXT NOT NULL,          -- running | completed | failed | interrupted | rolled_back
     started_at TEXT NOT NULL DEFAULT (datetime('now')),
+    heartbeat_at TEXT,
     finished_at TEXT,
     counts_json TEXT,
     error TEXT,

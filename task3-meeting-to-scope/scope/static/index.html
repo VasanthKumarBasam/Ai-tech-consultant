@@ -354,7 +354,7 @@ function md(src) {
     if (/^#{1,3} /.test(l)) { const n = l.match(/^#+/)[0].length; html += `<h${n}>${inline(l.slice(n + 1))}</h${n}>`; i++; continue; }
     if (l.startsWith("|")) {
       const rows = []; while (i < lines.length && lines[i].startsWith("|")) rows.push(lines[i++]);
-      const cells = (r) => r.slice(1, -1).split(" | ").map((c) => c.trim());
+      const cells = (r) => r.trim().slice(1, -1).split("|").map((c) => c.trim());
       html += `<table><thead><tr>${cells(rows[0]).map((c) => `<th>${inline(c)}</th>`).join("")}</tr></thead><tbody>${rows.slice(2).map((r) => `<tr>${cells(r).map((c) => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`; continue;
     }
     if (/^(- |\d+\. )/.test(l)) {

@@ -91,15 +91,24 @@ class IngestionPipeline:
 
     # ------------------------------------------------------------------ run
     def mark_interrupted(self) -> None:
+        """Runs still 'running' with no heartbeat for 10 minutes died with their process."""
         self.db.execute(
-            "UPDATE runs SET status='interrupted', finished_at=datetime('now') WHERE status='running'"
+            """UPDATE runs SET status='interrupted', finished_at=datetime('now')
+               WHERE status='running' AND COALESCE(heartbeat_at, started_at) < datetime('now', '-10 minutes')"""
         )
+
+    def active_run(self) -> dict | None:
+        row = self.db.one("SELECT id, started_at FROM runs WHERE status='running' ORDER BY id DESC LIMIT 1")
+        return dict(row) if row else None
 
     async def run(self, mode: str = "incremental", limit: int | None = None, urls: list[str] | None = None) -> dict:
         if _run_lock.locked():
             raise RunInProgress("An ingestion run is already in progress")
         async with _run_lock:
-            self.mark_interrupted()  # anything still 'running' died with a previous process
+            self.mark_interrupted()  # anything still 'running' without a heartbeat died with a previous process
+            other = self.active_run()
+            if other:
+                raise RunInProgress(f"Ingestion run #{other['id']} (started {other['started_at']} UTC) is still running in another process")
             run_id = self.db.execute(
                 "INSERT INTO runs(mode,status,params_json) VALUES(?, 'running', ?)",
                 (mode, json.dumps({"limit": limit, "urls": urls})),
@@ -175,7 +184,7 @@ class IngestionPipeline:
             else:
                 to_process.append((e, row))
 
-        describer = ImageDescriber(self.s, self.db, self.llm, fetcher)
+        describer = ImageDescriber(self.s, self.db, self.llm, fetcher, concurrency=self.s.vision_concurrency)
         await asyncio.gather(*(self._process(fetcher, describer, e, row, report, mode) for e, row in to_process))
         report.images = describer.stats
 
@@ -186,6 +195,7 @@ class IngestionPipeline:
     async def _process(self, fetcher: Fetcher, describer: ImageDescriber, e: SitemapEntry, row: dict | None,
                        report: RunReport, mode: str) -> None:
         url = e.url
+        self.db.execute("UPDATE runs SET heartbeat_at=datetime('now') WHERE id=?", (report.run_id,))
         try:
             use_conditional = mode == "incremental" and row and row["status"] == "indexed" and row["active"]
             res = await fetcher.get(

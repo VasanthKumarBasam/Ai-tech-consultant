@@ -73,6 +73,7 @@ def site() -> FakeSite:
 def settings(tmp_path) -> Settings:
     return Settings(
         db_path=tmp_path / "kb.sqlite3",
+        escalated_cases_path=tmp_path / "escalated_cases.jsonl",
         sitemap_url=f"{HOST}/support/sitemap.xml",
         embedder="hash",
         llm_provider="fake",

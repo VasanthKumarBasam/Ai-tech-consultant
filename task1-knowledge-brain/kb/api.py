@@ -37,7 +37,10 @@ def create_app(services: Services | None = None) -> FastAPI:
             from apscheduler.schedulers.asyncio import AsyncIOScheduler
             from apscheduler.triggers.cron import CronTrigger
 
-            scheduler = AsyncIOScheduler()
+            from zoneinfo import ZoneInfo
+
+            tz = ZoneInfo(svc.settings.scheduler_timezone)
+            scheduler = AsyncIOScheduler(timezone=tz)
 
             async def daily():
                 try:
@@ -46,9 +49,9 @@ def create_app(services: Services | None = None) -> FastAPI:
                 except RunInProgress:
                     log.info("daily ingestion skipped: a run is in progress")
 
-            scheduler.add_job(daily, CronTrigger.from_crontab(svc.settings.daily_schedule_cron), id="daily_ingest")
+            scheduler.add_job(daily, CronTrigger.from_crontab(svc.settings.daily_schedule_cron, timezone=tz), id="daily_ingest")
             scheduler.start()
-            log.info("daily ingestion scheduled: %s", svc.settings.daily_schedule_cron)
+            log.info("daily ingestion scheduled: %s (%s)", svc.settings.daily_schedule_cron, svc.settings.scheduler_timezone)
         yield
         if scheduler:
             scheduler.shutdown(wait=False)
@@ -142,7 +145,7 @@ def create_app(services: Services | None = None) -> FastAPI:
         s = svc()
         from .ingestion.pipeline import _run_lock
 
-        if _run_lock.locked():
+        if _run_lock.locked() or s.pipeline.active_run():
             raise HTTPException(409, "an ingestion run is already in progress")
 
         async def go():

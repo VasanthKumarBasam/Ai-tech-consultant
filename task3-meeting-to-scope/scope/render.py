@@ -13,6 +13,11 @@ APPROACH = {"configuration": "Configuration", "custom_development": "Custom deve
 PRIORITY = {"must_have": "Must have", "should_have": "Should have", "optional": "Optional"}
 
 
+def cell(x) -> str:
+    """Table-safe text: no pipes or line breaks inside a Markdown cell."""
+    return str(x if x is not None else "-").replace("|", "/").replace("\n", " ")
+
+
 def money(x: float, cur: str) -> str:
     return f"{cur} {x:,.0f}"
 
@@ -38,7 +43,7 @@ def render_markdown(pkg: ScopePackage, meta: dict, company: str = "Northstar Web
         w("| Change | Requirement | Before | After | Hours (approx.) |\n| --- | --- | --- | --- | --- |")
         for i in cr.items:
             flag = " **(outside the approved scope: separate approval needed)**" if i.out_of_scope else ""
-            w(f"| {i.change_type.title()} | {i.requirement_id} {i.title}{flag} | {(i.before or '-')[:160]} | {(i.after or '-')[:160]} | {i.hours_before:g} -> {i.hours_after:g} |")
+            w(f"| {i.change_type.title()} | {i.requirement_id} {cell(i.title)}{flag} | {cell((i.before or '-')[:160])} | {cell((i.after or '-')[:160])} | {i.hours_before:g} -> {i.hours_after:g} |")
         if cr.schedule_change:
             w(f"\n**Schedule:** {cr.schedule_change['before']} -> {cr.schedule_change['after']}")
         for o in cr.other_changes:
@@ -63,13 +68,13 @@ def render_markdown(pkg: ScopePackage, meta: dict, company: str = "Northstar Web
             continue
         f = feas[r.id]
         src = ", ".join(f"[{x.title}]({x.url})" for x in f.kb_sources[:2]) or "-"
-        w(f"| {r.id} {r.title} | {FEAS_LABEL[f.classification]}{'' if f.verified or f.classification == 'custom_development' else ' (unverified)'} | {f.rationale} | {src} |")
+        w(f"| {r.id} {cell(r.title)} | {FEAS_LABEL[f.classification]}{'' if f.verified or f.classification == 'custom_development' else ' (unverified)'} | {cell(f.rationale)} | {src} |")
 
     w("\n## Estimate")
     w("| Task | Deliverable | Low | Likely | High |\n| --- | --- | ---: | ---: | ---: |")
     for t in e.tasks:
-        w(f"| {t.id} {t.name} | {t.deliverable_id} | {t.low:g} | {t.likely:g} | {t.high:g} |")
-    w(f"| **Total** | | **{e.total_low:g}** | **{e.total_likely:g}** | **{e.total_high:g}** |")
+        w(f"| {t.id} {cell(t.name)} | {t.deliverable_id} | {t.low:g} | {t.likely:g} | {t.high:g} |")
+    w(f"| **Total** | - | **{e.total_low:g}** | **{e.total_likely:g}** | **{e.total_high:g}** |")
     w(f"\nExpected effort (weighted): **{e.total_expected:g} hours**, plus {e.contingency_pct:g}% contingency ({e.contingency_hours:g} h) = "
       f"**{e.total_with_contingency:g} hours**.")
     w(f"\nIndicative price at {money(e.hourly_rate, e.currency)}/hour: **{money(e.price_expected, e.currency)}** "

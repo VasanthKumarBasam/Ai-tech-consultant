@@ -32,7 +32,7 @@ def build_services(settings: Settings | None = None, llm=None, fetcher: Fetcher 
     db = Database(settings.db_path)
     store = ChunkStore(db, get_embedder(settings), allow_mismatch=allow_embedder_mismatch)
     llm = llm or build_llm(settings)
-    esc = Escalations(db, store)
+    esc = Escalations(db, store, settings.escalated_cases_path)
     return Services(
         settings=settings, db=db, store=store, llm=llm, escalations=esc,
         query=QueryService(settings, db, store, llm, esc),
