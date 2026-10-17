@@ -1,0 +1,1245 @@
+{
+  "description": "50 role-played customer emails to Northstar Web Studio (a studio that builds and supports Brilliant Directories sites). Written for this capstone; names and companies are fictional. split=test cases are held out from prompt development.",
+  "emails": [
+    {
+      "id": "E01",
+      "split": "dev",
+      "thread_id": "T-E01",
+      "from_name": "Priya Raman",
+      "from_email": "priya@bayareapetgroomers.com",
+      "subject": "Importing our member list",
+      "body": "Hi team,\n\nWe finally have the new directory live. Our old site exported about 400 groomers into an Excel sheet. How do we bulk import them into the new site? Do the columns need specific names, and is there anything that will break the import?\n\nThanks!\nPriya",
+      "received_at": "2026-10-12T08:30:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558475",
+          "5000568062"
+        ],
+        "key_facts": [
+          "List Actions",
+          "Import Members via CSV",
+          "template"
+        ],
+        "must_not": [],
+        "behavior": "Explain the documented CSV import path and template/header rules, link the article."
+      }
+    },
+    {
+      "id": "E02",
+      "split": "test",
+      "thread_id": "T-E02",
+      "from_name": "Marcus Lee",
+      "from_email": "marcus@ohioroofingpros.com",
+      "subject": "Can search results open on the map?",
+      "body": "Hello,\nOur visitors mostly want to see roofers near them. Can we make the member search results start in map view instead of the list? Where is that setting?\nMarcus",
+      "received_at": "2026-10-12T10:47:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000681551"
+        ],
+        "key_facts": [
+          "Search Results Pages",
+          "Member Search Layout",
+          "Map View"
+        ],
+        "must_not": [],
+        "behavior": "Give the Design Settings path and note the map add-on requirement."
+      }
+    },
+    {
+      "id": "E03",
+      "split": "dev",
+      "thread_id": "T-E03",
+      "from_name": "Dana Whitfield",
+      "from_email": "dana@txdentalassoc.org",
+      "subject": "Adding PayPal for membership payments",
+      "body": "Hi,\nSome of our dental members asked to pay by PayPal instead of card. How do I add PayPal as a payment option on our directory? Is there anything to watch out for if we already use Stripe?\n\nDana Whitfield\nMembership Coordinator, Texas Dental Association",
+      "received_at": "2026-10-12T13:04:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000673830"
+        ],
+        "key_facts": [
+          "Finance",
+          "Payment Settings",
+          "Add New Payment Gateway"
+        ],
+        "must_not": [],
+        "behavior": "Steps from the payment gateway article, including the note that subscriptions don't move to a new gateway."
+      }
+    },
+    {
+      "id": "E04",
+      "split": "test",
+      "thread_id": "T-E04",
+      "from_name": "Tom Becker",
+      "from_email": "tom@chicagoweddingvendors.com",
+      "subject": "Old URLs from our previous site",
+      "body": "Hey there, we migrated from Squarespace and Google still shows a bunch of our old vendor page URLs which now 404. Can I redirect the old URLs to the new pages myself? How?",
+      "received_at": "2026-10-12T15:21:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000682632"
+        ],
+        "key_facts": [
+          "Developer Hub",
+          "301 Redirects",
+          "New Redirect Rule"
+        ],
+        "must_not": [],
+        "behavior": "Explain the 301 Redirects tool steps."
+      }
+    },
+    {
+      "id": "E05",
+      "split": "dev",
+      "thread_id": "T-E05",
+      "from_name": "Aisha Khan",
+      "from_email": "aisha@londonyogateachers.co.uk",
+      "subject": "Members asking for invoices",
+      "body": "Hi, a few of our yoga teacher members need invoices for their accountants. Can they download invoices themselves from their account or do I need to send them? Thanks, Aisha",
+      "received_at": "2026-10-12T17:38:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000674169"
+        ],
+        "key_facts": [
+          "invoice"
+        ],
+        "must_not": [],
+        "behavior": "Explain how invoices can be downloaded, per the article."
+      }
+    },
+    {
+      "id": "E06",
+      "split": "dev",
+      "thread_id": "T-E06",
+      "from_name": "Ben Ortiz",
+      "from_email": "ben@azsolarinstallers.com",
+      "subject": "Send site emails from our Gmail",
+      "body": "Hi support, we'd like the emails our directory sends (welcome emails, notifications) to go out through our Google Workspace account so they stop landing in spam. Is that possible and how do we set it up?",
+      "received_at": "2026-10-12T19:55:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000681841"
+        ],
+        "key_facts": [
+          "Gmail"
+        ],
+        "must_not": [],
+        "behavior": "Point to the Gmail sending article steps."
+      }
+    },
+    {
+      "id": "E07",
+      "split": "test",
+      "thread_id": "T-E07",
+      "from_name": "Grace Liu",
+      "from_email": "grace@sfbayeventplanners.com",
+      "subject": "Approving reviews before they go live",
+      "body": "Hello! We had a nasty fake review posted on one of our planners last week. Is there a way to approve reviews before they show on profiles? Where do I do that in the admin?",
+      "received_at": "2026-10-12T22:12:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000682630"
+        ],
+        "key_facts": [
+          "review"
+        ],
+        "must_not": [],
+        "behavior": "Explain review approval from admin."
+      }
+    },
+    {
+      "id": "E08",
+      "split": "dev",
+      "thread_id": "T-E08",
+      "from_name": "Henry Adams",
+      "from_email": "henry@nyphotographersguild.org",
+      "subject": "Newsletter to all members",
+      "body": "Hi, can I send one email campaign to all our members directly from the directory admin, like a newsletter? Or do I need Mailchimp?",
+      "received_at": "2026-10-13T00:29:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558357"
+        ],
+        "key_facts": [],
+        "must_not": [],
+        "behavior": "Answer from the mass email campaign article."
+      }
+    },
+    {
+      "id": "E09",
+      "split": "dev",
+      "thread_id": "T-E09",
+      "from_name": "Olivia Martin",
+      "from_email": "olivia@denverhomeinspectors.com",
+      "subject": "Search box suggestions",
+      "body": "When people type in our search bar nothing is suggested. I've seen other directories suggest categories as you type. Can we turn that on?",
+      "received_at": "2026-10-13T02:46:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000657865"
+        ],
+        "key_facts": [
+          "predictive"
+        ],
+        "must_not": [],
+        "behavior": "Explain predictive keyword search."
+      }
+    },
+    {
+      "id": "E10",
+      "split": "test",
+      "thread_id": "T-E10",
+      "from_name": "Raj Patel",
+      "from_email": "raj@njaccountantsnetwork.com",
+      "subject": "Hide forms for Basic plan members",
+      "body": "Hi,\nOur Basic plan members shouldn't be able to post articles or events \u2014 only Premium. Can we hide those dashboard forms per membership plan? If so where?\nRegards, Raj",
+      "received_at": "2026-10-13T05:03:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000681812"
+        ],
+        "key_facts": [
+          "membership plan"
+        ],
+        "must_not": [],
+        "behavior": "Explain enabling/disabling dashboard forms per plan."
+      }
+    },
+    {
+      "id": "E11",
+      "split": "dev",
+      "thread_id": "T-E11",
+      "from_name": "Sofia Rossi",
+      "from_email": "sofia@miamiinteriordesigners.com",
+      "subject": "Custom CSS changes",
+      "body": "Hi, our designer wants to tweak a few colours and fonts with CSS. Where can she add custom CSS without it getting overwritten by updates?",
+      "received_at": "2026-10-13T07:20:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000559709"
+        ],
+        "key_facts": [
+          "CSS"
+        ],
+        "must_not": [],
+        "behavior": "Explain overriding default stylesheets."
+      }
+    },
+    {
+      "id": "E12",
+      "split": "test",
+      "thread_id": "T-E12",
+      "from_name": "Liam Walsh",
+      "from_email": "liam@irishpubsdirectory.ie",
+      "subject": "Bulk add categories",
+      "body": "Hi folks, we have ~120 categories and sub-categories (pub types, music nights, etc.) in a spreadsheet. Is there a way to import them in one go rather than typing each one?",
+      "received_at": "2026-10-13T09:37:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558401"
+        ],
+        "key_facts": [
+          "CSV"
+        ],
+        "must_not": [],
+        "behavior": "Explain category CSV import."
+      }
+    },
+    {
+      "id": "E13",
+      "split": "dev",
+      "thread_id": "T-E13",
+      "from_name": "Karen Brooks",
+      "from_email": "karen@floridavetclinics.com",
+      "subject": "How do I refund one of our members?",
+      "body": "Hi, one of our clinic members paid for the annual plan twice by mistake through our site (Stripe). How do I refund one of those payments to them from the admin panel?\nKaren",
+      "received_at": "2026-10-13T11:54:00Z",
+      "expected": {
+        "category": "how_to",
+        "risk": "low",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000674165"
+        ],
+        "key_facts": [
+          "Payment History",
+          "Refund Payment"
+        ],
+        "must_not": [
+          "refund_promise"
+        ],
+        "behavior": "Admin how-to about refunding THEIR member: give documented steps; mention refunds don't cancel subscriptions. Not a refund request to us."
+      }
+    },
+    {
+      "id": "E14",
+      "split": "dev",
+      "thread_id": "T-E14",
+      "from_name": "Marcus Lee",
+      "from_email": "marcus@ohioroofingpros.com",
+      "subject": "Search shows far-away roofers first",
+      "body": "Hi again, when I search \"roof repair\" in Columbus, the first results are companies 80 miles away and local ones are on page 2. Why is the order like this and can I fix it?",
+      "received_at": "2026-10-13T14:11:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000662041"
+        ],
+        "key_facts": [
+          "distance"
+        ],
+        "must_not": [],
+        "behavior": "Explain how ordering/distance sorting works per article."
+      }
+    },
+    {
+      "id": "E15",
+      "split": "test",
+      "thread_id": "T-E15",
+      "from_name": "Nina Petrova",
+      "from_email": "nina@bostontutorsonline.com",
+      "subject": "Search returns nothing for 'math'",
+      "body": "Our member search returns \"no results\" for \"math tutor\" even though we have 30 math tutors listed. This started after we renamed some categories. Help!",
+      "received_at": "2026-10-13T16:28:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000660016"
+        ],
+        "key_facts": [],
+        "must_not": [],
+        "behavior": "Use the troubleshooting member search results article."
+      }
+    },
+    {
+      "id": "E16",
+      "split": "dev",
+      "thread_id": "T-E16",
+      "from_name": "Chris Evans",
+      "from_email": "chris@seattlecoffeeroasters.com",
+      "subject": "Site says Not Secure",
+      "body": "Chrome shows \"Not secure\" next to our directory URL since we switched the domain last week. Is SSL included and how do we get the padlock back?",
+      "received_at": "2026-10-13T18:45:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000665570"
+        ],
+        "key_facts": [
+          "SSL"
+        ],
+        "must_not": [],
+        "behavior": "Use the SSL/HTTPS FAQ."
+      }
+    },
+    {
+      "id": "E17",
+      "split": "test",
+      "thread_id": "T-E01",
+      "from_name": "Priya Raman",
+      "from_email": "priya@bayareapetgroomers.com",
+      "subject": "Import failed - member limit?",
+      "body": "Hi, the CSV import stopped with the message \"Import File Exceeds Member Limit\". We only have 400 rows. What does this mean?",
+      "received_at": "2026-10-13T21:02:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558475"
+        ],
+        "key_facts": [
+          "member limit"
+        ],
+        "must_not": [],
+        "behavior": "Explain the member limit rule (existing + file members vs site limit)."
+      }
+    },
+    {
+      "id": "E18",
+      "split": "dev",
+      "thread_id": "T-E18",
+      "from_name": "Dana Whitfield",
+      "from_email": "dana@txdentalassoc.org",
+      "subject": "Stripe key won't save",
+      "body": "When I paste our Stripe secret key into Payment Settings it says the key is invalid. I copied it straight from Stripe. What am I doing wrong?",
+      "received_at": "2026-10-13T23:19:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000673830"
+        ],
+        "key_facts": [
+          "sk_",
+          "rk_"
+        ],
+        "must_not": [],
+        "behavior": "Mention key rules: 25-255 chars, no dots, sk_/rk_ prefixes."
+      }
+    },
+    {
+      "id": "E19",
+      "split": "test",
+      "thread_id": "T-E19",
+      "from_name": "Sam Carter",
+      "from_email": "sam@atlantalandscapers.com",
+      "subject": "Contact form emails not arriving",
+      "body": "Customers say they've filled in the contact form on member profiles but our members never get the emails. Where do those messages go and how do I check them?",
+      "received_at": "2026-10-14T01:36:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000673655",
+          "5000558373"
+        ],
+        "key_facts": [
+          "inbox"
+        ],
+        "must_not": [],
+        "behavior": "Point to the Forms Inbox / email articles."
+      }
+    },
+    {
+      "id": "E20",
+      "split": "dev",
+      "thread_id": "T-E20",
+      "from_name": "Karen Brooks",
+      "from_email": "karen@floridavetclinics.com",
+      "subject": "Refunded member was charged again",
+      "body": "I refunded a member's payment last month like the guide said, but they've just been charged again for this month. Why did that happen?",
+      "received_at": "2026-10-14T03:53:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000674165",
+          "5000567728"
+        ],
+        "key_facts": [
+          "subscription"
+        ],
+        "must_not": [
+          "refund_promise"
+        ],
+        "behavior": "Explain refunding doesn't cancel the subscription; point to ending subscriptions."
+      }
+    },
+    {
+      "id": "E21",
+      "split": "dev",
+      "thread_id": "T-E21",
+      "from_name": "Victor Huang",
+      "from_email": "victor@caengineersdirectory.com",
+      "subject": "Remote MySQL connection refused",
+      "body": "Our BI tool can't connect to the directory database \u2014 connection refused on port 3306. Do we need to enable something for remote MySQL access?",
+      "received_at": "2026-10-14T06:10:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000681790"
+        ],
+        "key_facts": [
+          "remote MySQL"
+        ],
+        "must_not": [],
+        "behavior": "Use the remote MySQL access article."
+      }
+    },
+    {
+      "id": "E22",
+      "split": "test",
+      "thread_id": "T-E22",
+      "from_name": "Aisha Khan",
+      "from_email": "aisha@londonyogateachers.co.uk",
+      "subject": "Conflicting Data Error on import",
+      "body": "Our member import shows \"Conflicting Data Error\" on a lot of rows. We have name, first_name and last_name columns filled in. What's wrong?",
+      "received_at": "2026-10-14T08:27:00Z",
+      "expected": {
+        "category": "troubleshooting",
+        "risk": "medium",
+        "requires_human": false,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558475"
+        ],
+        "key_facts": [
+          "first_name",
+          "last_name"
+        ],
+        "must_not": [],
+        "behavior": "Explain using either name or first+last, not both."
+      }
+    },
+    {
+      "id": "E23",
+      "split": "dev",
+      "thread_id": "T-E23",
+      "from_name": "Olivia Martin",
+      "from_email": "olivia@denverhomeinspectors.com",
+      "subject": "Online booking for inspectors",
+      "body": "Hi team,\nWe'd love homeowners to be able to book an inspection slot directly from an inspector's profile \u2014 pick a date/time, pay a deposit, get a confirmation email. Could you build that for us? What would you need from us to get started?\nOlivia",
+      "received_at": "2026-10-14T10:44:00Z",
+      "expected": {
+        "category": "project_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Restate, note any existing capability, propose scoping call; no price/date."
+      }
+    },
+    {
+      "id": "E24",
+      "split": "test",
+      "thread_id": "T-E24",
+      "from_name": "Henry Adams",
+      "from_email": "henry@nyphotographersguild.org",
+      "subject": "Sync new members to HubSpot",
+      "body": "We use HubSpot as our CRM. Can you integrate the directory so every new member signup automatically creates a contact in HubSpot with their plan and category?",
+      "received_at": "2026-10-14T13:01:00Z",
+      "expected": {
+        "category": "project_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Project: scoping call, no commitments."
+      }
+    },
+    {
+      "id": "E25",
+      "split": "dev",
+      "thread_id": "T-E25",
+      "from_name": "Dana Whitfield",
+      "from_email": "dana@txdentalassoc.org",
+      "subject": "Homepage redesign for our rebrand",
+      "body": "The association is rebranding in spring (new logo, colours, tagline). We'll need the directory homepage redesigned to match, plus updated member badges. Can your team take this on?",
+      "received_at": "2026-10-14T15:18:00Z",
+      "expected": {
+        "category": "project_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Project: scoping call, ask for brand assets; no dates."
+      }
+    },
+    {
+      "id": "E26",
+      "split": "dev",
+      "thread_id": "T-E26",
+      "from_name": "Tom Becker",
+      "from_email": "tom@chicagoweddingvendors.com",
+      "subject": "Mobile app version",
+      "body": "Couples keep asking for an app. Could you build an iOS/Android app version of our wedding vendor directory with favourites and push notifications?",
+      "received_at": "2026-10-14T17:35:00Z",
+      "expected": {
+        "category": "project_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Project: scoping call; no estimates."
+      }
+    },
+    {
+      "id": "E27",
+      "split": "test",
+      "thread_id": "T-E27",
+      "from_name": "Sofia Rossi",
+      "from_email": "sofia@miamiinteriordesigners.com",
+      "subject": "Spanish version of the site",
+      "body": "About half our visitors are Spanish speakers. We'd like a Spanish version of the directory with a language switcher. Is that something you can build?",
+      "received_at": "2026-10-14T19:52:00Z",
+      "expected": {
+        "category": "project_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Project: scoping call."
+      }
+    },
+    {
+      "id": "E28",
+      "split": "dev",
+      "thread_id": "T-E28",
+      "from_name": "Raj Patel",
+      "from_email": "raj@njaccountantsnetwork.com",
+      "subject": "Onboarding wizard with document upload",
+      "body": "We want new accountants to go through a 3-step onboarding wizard when they join: upload their CPA licence, choose specialties, then pick a plan. Admins should approve the licence before the profile goes live. Can you build this?",
+      "received_at": "2026-10-14T22:09:00Z",
+      "expected": {
+        "category": "project_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Project: scoping call; may mention existing member signup flow if sourced."
+      }
+    },
+    {
+      "id": "E29",
+      "split": "dev",
+      "thread_id": "T-E29",
+      "from_name": "Greg Novak",
+      "from_email": "greg@midwestfencecontractors.com",
+      "subject": "Cancel our support plan + refund",
+      "body": "Hi,\nWe've decided to manage the site ourselves from next month. Please cancel our monthly support plan and refund this month's charge since we barely used it.\nGreg Novak",
+      "received_at": "2026-10-15T00:26:00Z",
+      "expected": {
+        "category": "refund_cancellation",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "confirm_cancellation"
+        ],
+        "behavior": "Acknowledge, pass to billing; no refund or cancellation confirmation."
+      }
+    },
+    {
+      "id": "E30",
+      "split": "test",
+      "thread_id": "T-E30",
+      "from_name": "Linda Park",
+      "from_email": "linda@portlandmassagetherapists.com",
+      "subject": "Charged twice this month",
+      "body": "Hello, our card statement shows two charges from you on October 3rd for the same hosting invoice. Please refund the duplicate. Invoice INV-20931.",
+      "received_at": "2026-10-15T02:43:00Z",
+      "expected": {
+        "category": "refund_cancellation",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment"
+        ],
+        "behavior": "Acknowledge, route to billing; no promise."
+      }
+    },
+    {
+      "id": "E31",
+      "split": "dev",
+      "thread_id": "T-E31",
+      "from_name": "Paul Murphy",
+      "from_email": "paul@vermontinnkeepers.org",
+      "subject": "Closing our directory - any fee?",
+      "body": "We've decided to close the innkeepers directory at the end of the year. Is there a cancellation fee to close it, and what do we need to do?",
+      "received_at": "2026-10-15T05:00:00Z",
+      "expected": {
+        "category": "refund_cancellation",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000682637",
+          "5000682629"
+        ],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "confirm_cancellation"
+        ],
+        "behavior": "May cite the cancellation-fee article; route to account manager; offer data backup info; no confirmation."
+      }
+    },
+    {
+      "id": "E32",
+      "split": "test",
+      "thread_id": "T-E32",
+      "from_name": "Emma Scott",
+      "from_email": "emma@austindogwalkers.com",
+      "subject": "Downgrade and prorated refund",
+      "body": "We want to downgrade from the Pro hosting plan to Standard starting now, and get a prorated refund for the rest of this month. Can you do that today?",
+      "received_at": "2026-10-15T07:17:00Z",
+      "expected": {
+        "category": "refund_cancellation",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "confirm_cancellation"
+        ],
+        "behavior": "Route to billing; no amount, no 'today'."
+      }
+    },
+    {
+      "id": "E33",
+      "split": "dev",
+      "thread_id": "T-E33",
+      "from_name": "Jake Morris",
+      "from_email": "jake@coloradoskischools.com",
+      "subject": "Cancel SEO add-on we never used",
+      "body": "We were billed for the SEO add-on for 3 months but nobody ever did any SEO work for us. Cancel it and give us our money back please.",
+      "received_at": "2026-10-15T09:34:00Z",
+      "expected": {
+        "category": "refund_cancellation",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "confirm_cancellation"
+        ],
+        "behavior": "Acknowledge seriously, route to account manager/billing; no admission or refund."
+      }
+    },
+    {
+      "id": "E34",
+      "split": "test",
+      "thread_id": "T-E34",
+      "from_name": "Rita Gomez",
+      "from_email": "rita@sandiegosurfinstructors.com",
+      "subject": "Refund now or I dispute it",
+      "body": "This is my third email. Refund the $499 setup fee by Friday or I'm filing a chargeback with my bank and leaving a review everywhere. I'm done waiting.",
+      "received_at": "2026-10-15T11:51:00Z",
+      "expected": {
+        "category": "refund_cancellation",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "confirm_cancellation"
+        ],
+        "behavior": "De-escalate, apologise for delay, senior person follows up; no promise; flags chargeback."
+      }
+    },
+    {
+      "id": "E35",
+      "split": "dev",
+      "thread_id": "T-E35",
+      "from_name": "Chris Evans",
+      "from_email": "chris@seattlecoffeeroasters.com",
+      "subject": "Site down twice this week",
+      "body": "Our directory was down Monday morning and again last night. Members are emailing ME asking what's going on. This is unacceptable for what we pay. What happened?",
+      "received_at": "2026-10-15T14:08:00Z",
+      "expected": {
+        "category": "complaint",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "admit_liability"
+        ],
+        "behavior": "Acknowledge impact, apologise for experience, account manager follows up; no cause speculation or credits."
+      }
+    },
+    {
+      "id": "E36",
+      "split": "test",
+      "thread_id": "T-E36",
+      "from_name": "Grace Liu",
+      "from_email": "grace@sfbayeventplanners.com",
+      "subject": "Your update broke our homepage",
+      "body": "Since your team's update on Tuesday our homepage slider is gone and the featured planners section shows broken images. We had a big promotion running. Very disappointed.",
+      "received_at": "2026-10-15T16:25:00Z",
+      "expected": {
+        "category": "complaint",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "admit_liability"
+        ],
+        "behavior": "Acknowledge; no blame admission; escalate to account manager."
+      }
+    },
+    {
+      "id": "E37",
+      "split": "dev",
+      "thread_id": "T-E37",
+      "from_name": "Sam Carter",
+      "from_email": "sam@atlantalandscapers.com",
+      "subject": "Still waiting after 5 days",
+      "body": "I opened a ticket 5 days ago about our member signup page and nobody has replied. Is anyone actually reading these?",
+      "received_at": "2026-10-15T18:42:00Z",
+      "expected": {
+        "category": "complaint",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "date_commitment",
+          "admit_liability"
+        ],
+        "behavior": "Apologise for the wait, confirm someone is on it; no deadline."
+      }
+    },
+    {
+      "id": "E38",
+      "split": "dev",
+      "thread_id": "T-E38",
+      "from_name": "Victor Huang",
+      "from_email": "victor@caengineersdirectory.com",
+      "subject": "Custom fields deleted",
+      "body": "Your developer was supposed to add two fields to member profiles and instead our 'PE License #' and 'Specialties' fields are gone, along with the data members entered. We need this restored.",
+      "received_at": "2026-10-15T20:59:00Z",
+      "expected": {
+        "category": "complaint",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "admit_liability",
+          "date_commitment"
+        ],
+        "behavior": "Acknowledge seriousness, escalate urgently to project lead; no promise of restoration timing."
+      }
+    },
+    {
+      "id": "E39",
+      "split": "test",
+      "thread_id": "T-E39",
+      "from_name": "Mark Jensen",
+      "from_email": "mark@phoenixhvacpros.com",
+      "subject": "Considering legal action",
+      "body": "We lost a month of leads because the quote request form on our directory silently stopped working after your changes. I've spoken to our attorney and we're considering legal action unless this is made right.",
+      "received_at": "2026-10-15T23:16:00Z",
+      "expected": {
+        "category": "complaint",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "admit_liability"
+        ],
+        "behavior": "Neutral, no admission, escalate to management; flags legal threat."
+      }
+    },
+    {
+      "id": "E40",
+      "split": "dev",
+      "thread_id": "T-E40",
+      "from_name": "Linda Park",
+      "from_email": "linda@portlandmassagetherapists.com",
+      "subject": "Invoice higher than quoted",
+      "body": "The invoice for the directory build came to more than the proposal we signed. Nobody told us about extra charges. Please explain.",
+      "received_at": "2026-10-16T01:33:00Z",
+      "expected": {
+        "category": "complaint",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "admit_liability"
+        ],
+        "behavior": "Acknowledge, route to account manager with proposal; no amounts."
+      }
+    },
+    {
+      "id": "E41",
+      "split": "dev",
+      "thread_id": "T-E41",
+      "from_name": "Tom Becker",
+      "from_email": "tom@chicagoweddingvendors.com",
+      "subject": "Cost of a job board?",
+      "body": "How much would it cost to add a job board where venues can post openings and vendors can apply? Rough ballpark is fine.",
+      "received_at": "2026-10-16T03:50:00Z",
+      "expected": {
+        "category": "quote_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "effort_estimate"
+        ],
+        "behavior": "No ballpark; scoping call; may note existing post types if sourced."
+      }
+    },
+    {
+      "id": "E42",
+      "split": "test",
+      "thread_id": "T-E42",
+      "from_name": "Paul Murphy",
+      "from_email": "paul@vermontinnkeepers.org",
+      "subject": "Migrating 2,000 listings from WordPress",
+      "body": "Before we decide on closing vs. moving: what would it cost to migrate our 2,000 WordPress listings into a Brilliant Directories site? Can BD host our WordPress blog too?",
+      "received_at": "2026-10-16T06:07:00Z",
+      "expected": {
+        "category": "quote_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000614045",
+          "5000558475"
+        ],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "effort_estimate"
+        ],
+        "behavior": "No price; can answer the WordPress hosting part from KB; scoping call."
+      }
+    },
+    {
+      "id": "E43",
+      "split": "dev",
+      "thread_id": "T-E43",
+      "from_name": "Nina Petrova",
+      "from_email": "nina@bostontutorsonline.com",
+      "subject": "Monthly SEO and content support",
+      "body": "What do you charge for ongoing monthly SEO and blog content for a directory our size (about 600 tutors)?",
+      "received_at": "2026-10-16T08:24:00Z",
+      "expected": {
+        "category": "quote_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "effort_estimate"
+        ],
+        "behavior": "No price; scoping call."
+      }
+    },
+    {
+      "id": "E44",
+      "split": "test",
+      "thread_id": "T-E44",
+      "from_name": "Marcus Lee",
+      "from_email": "marcus@ohioroofingpros.com",
+      "subject": "Price for grid and map view add-ons",
+      "body": "If we want both the Grid View and Map View for search results, what will that cost us including your setup time?",
+      "received_at": "2026-10-16T10:41:00Z",
+      "expected": {
+        "category": "quote_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000681551"
+        ],
+        "key_facts": [
+          "add-on"
+        ],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "effort_estimate"
+        ],
+        "behavior": "Can say both views need add-ons (sourced); no price; route to sales."
+      }
+    },
+    {
+      "id": "E45",
+      "split": "dev",
+      "thread_id": "T-E45",
+      "from_name": "Aisha Khan",
+      "from_email": "aisha@londonyogateachers.co.uk",
+      "subject": "Estimate for members-only resources",
+      "body": "Could you send an estimate for a members-only resources area (PDF downloads, recorded classes) that only paid members can access?",
+      "received_at": "2026-10-16T12:58:00Z",
+      "expected": {
+        "category": "quote_request",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "effort_estimate"
+        ],
+        "behavior": "No estimate; scoping call."
+      }
+    },
+    {
+      "id": "E46",
+      "split": "dev",
+      "thread_id": "T-E01",
+      "from_name": "Priya Raman",
+      "from_email": "priya@bayareapetgroomers.com",
+      "subject": "Re: Importing our member list",
+      "body": "Hi, just following up on my question from earlier this week about importing our 400 groomers. Any update? We want to launch next Friday.",
+      "received_at": "2026-10-16T15:15:00Z",
+      "expected": {
+        "category": "follow_up",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558475"
+        ],
+        "key_facts": [],
+        "must_not": [
+          "date_commitment"
+        ],
+        "behavior": "Reference earlier question; can restate import steps; no promise about launch date."
+      }
+    },
+    {
+      "id": "E47",
+      "split": "test",
+      "thread_id": "T-E29",
+      "from_name": "Greg Novak",
+      "from_email": "greg@midwestfencecontractors.com",
+      "subject": "Re: Cancel our support plan + refund",
+      "body": "Following up on my cancellation request from last week. Has it been processed? I haven't heard anything.",
+      "received_at": "2026-10-16T17:32:00Z",
+      "expected": {
+        "category": "follow_up",
+        "risk": "high",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "confirm_cancellation"
+        ],
+        "behavior": "Don't claim it was processed; say billing is reviewing; no dates."
+      }
+    },
+    {
+      "id": "E48",
+      "split": "dev",
+      "thread_id": "T-E23",
+      "from_name": "Olivia Martin",
+      "from_email": "olivia@denverhomeinspectors.com",
+      "subject": "Re: Online booking for inspectors",
+      "body": "Hi, checking in on the booking feature idea I sent over. Did you get a chance to look at it? Happy to jump on a call.",
+      "received_at": "2026-10-16T19:49:00Z",
+      "expected": {
+        "category": "follow_up",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": false,
+        "expected_sources": [],
+        "key_facts": [],
+        "must_not": [
+          "refund_promise",
+          "amount",
+          "date_commitment",
+          "effort_estimate"
+        ],
+        "behavior": "Acknowledge, propose scheduling the scoping call; no price."
+      }
+    },
+    {
+      "id": "E49",
+      "split": "test",
+      "thread_id": "T-E16",
+      "from_name": "Chris Evans",
+      "from_email": "chris@seattlecoffeeroasters.com",
+      "subject": "Re: Site says Not Secure",
+      "body": "Still seeing \"Not secure\" after following your earlier suggestions. Any update on the SSL issue?",
+      "received_at": "2026-10-16T22:06:00Z",
+      "expected": {
+        "category": "follow_up",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000665570"
+        ],
+        "key_facts": [],
+        "must_not": [
+          "date_commitment"
+        ],
+        "behavior": "Reference prior thread; escalate technical check; no claims of fix."
+      }
+    },
+    {
+      "id": "E50",
+      "split": "dev",
+      "thread_id": "T-E06",
+      "from_name": "Ben Ortiz",
+      "from_email": "ben@azsolarinstallers.com",
+      "subject": "Re: Send site emails from our Gmail",
+      "body": "Thanks for the Gmail instructions. Following up \u2014 do I also need to change anything in our email forwarders afterwards, or is that separate?",
+      "received_at": "2026-10-17T00:23:00Z",
+      "expected": {
+        "category": "follow_up",
+        "risk": "medium",
+        "requires_human": true,
+        "kb_needed": true,
+        "expected_sources": [
+          "5000558373",
+          "5000681841"
+        ],
+        "key_facts": [],
+        "must_not": [],
+        "behavior": "Answer the follow-up from KB if available, reference prior reply."
+      }
+    }
+  ]
+}

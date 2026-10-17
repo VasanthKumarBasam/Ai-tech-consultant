@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inbox | Consultant Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="bar">
+  <div class="brand">Consultant Desk <small>Inbox agent</small></div>
+  <nav class="nav" aria-label="Apps">
+    <a href="http://localhost:8001/">Knowledge</a>
+    <a href="http://localhost:3002/" aria-current="page">Inbox</a>
+    <a href="http://localhost:8003/">Scope builder</a>
+  </nav>
+  <div class="health" id="health"><span class="pill">Checking services…</span></div>
+</div>
+<div class="subnav" role="tablist">
+  <button role="tab" data-view="inbox" aria-selected="true">Inbox</button>
+  <button role="tab" data-view="autonomy" aria-selected="false">Autonomy</button>
+  <button role="tab" data-view="learning" aria-selected="false">Learning</button>
+  <button role="tab" data-view="audit" aria-selected="false">Audit log</button>
+  <label class="who">Reviewing as <input id="reviewer" type="text" placeholder="your name" autocomplete="name"></label>
+</div>
+<div id="banners"></div>
+<main id="view"></main>
+<script type="module" src="/app.js"></script>
+</body>
+</html>

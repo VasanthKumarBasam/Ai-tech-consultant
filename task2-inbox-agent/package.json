@@ -1,0 +1,38 @@
+{
+  "name": "inbox-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Task 2 - Inbox Agent: drafts grounded customer-email replies via the Knowledge Brain API, with human review, feedback learning and an auditable autonomy rule.",
+  "type": "module",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "build:ui": "esbuild src/ui/app.ts --bundle --format=esm --target=es2020 --outfile=public/app.js",
+    "start": "npm run build:ui && tsx src/server.ts",
+    "dev": "npm run build:ui && tsx watch src/server.ts",
+    "seed": "tsx src/cli.ts seed",
+    "learn": "tsx src/cli.ts learn",
+    "eval": "tsx src/evaluation/runEval.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.16.0",
+    "@types/supertest": "^6.0.2",
+    "esbuild": "^0.24.0",
+    "supertest": "^7.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}
