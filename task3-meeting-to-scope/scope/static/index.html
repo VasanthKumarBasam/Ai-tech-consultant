@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scope Builder | Consultant Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F4F0; --surface:#FFFFFF; --ink:#1C2430; --muted:#5B6573; --line:#D5DBD2;
+  --accent:#2443B8; --accent-ink:#FFFFFF; --mark:#FFE27A; --mark-strong:#F5C518;
+  --ok:#1E7A4C; --ok-bg:#E3F2E9; --warn:#9A5B00; --warn-bg:#FCF0D9; --bad:#B3261E; --bad-bg:#FBE4E1;
+  --ui:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --read:"Newsreader",Georgia,"Times New Roman",serif; --r-sm:4px; --r-md:8px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--ui)}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button,input,select,textarea{font:inherit;color:inherit}
+.bar{display:flex;align-items:center;gap:24px;padding:12px 24px;background:var(--surface);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:-.01em;font-size:18px}
+.brand small{font-weight:400;color:var(--muted);margin-left:6px;font-size:16px}
+.nav{display:flex;gap:4px}
+.nav a{padding:6px 12px;border-radius:var(--r-sm);text-decoration:none;color:var(--muted);font-size:16px}
+.nav a[aria-current=page]{background:var(--ink);color:#fff}
+.health{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;font-size:14px}
+.pill{padding:2px 10px;border-radius:999px;background:var(--paper);border:1px solid var(--line);white-space:nowrap;color:var(--muted)}
+.pill.ok{background:var(--ok-bg);border-color:transparent;color:var(--ok)}
+.pill.warn{background:var(--warn-bg);border-color:transparent;color:var(--warn)}
+.pill.bad{background:var(--bad-bg);border-color:transparent;color:var(--bad)}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;padding:20px 24px 60px}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+aside.projects{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:12px;align-self:start}
+aside.projects h2{font-size:14px;color:var(--muted);margin:4px 4px 8px;font-weight:600}
+.proj{display:block;width:100%;text-align:left;border:0;background:transparent;padding:8px 10px;border-radius:var(--r-sm);cursor:pointer}
+.proj:hover{background:var(--paper)}
+.proj[aria-current=true]{background:#E8ECF9;box-shadow:inset 3px 0 0 var(--accent)}
+.proj small{display:block;color:var(--muted)}
+.btn{border:0;border-radius:var(--r-md);padding:9px 16px;background:var(--accent);color:var(--accent-ink);font-weight:600;cursor:pointer}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.quiet{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn.small{padding:5px 11px;font-size:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin-bottom:16px}
+.card h2{font-size:16px;margin:0 0 10px}
+.card h3{font-size:14px;margin:16px 0 6px;color:var(--muted);font-weight:600}
+h1{font-size:24px;margin:0;letter-spacing:-.015em}
+.sub{color:var(--muted);margin:2px 0 16px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:1100px){.two{grid-template-columns:1fr}}
+.item{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.item:first-of-type{border-top:0}
+.item .grow{flex:1;min-width:180px}
+.item small{color:var(--muted)}
+.chip{font-size:12px;padding:1px 8px;border-radius:999px;background:var(--paper);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.chip.ok{background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-bg);color:var(--warn);border-color:transparent}
+.chip.bad{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.chip.blue{background:#E8ECF9;color:var(--accent);border-color:transparent}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:28px 120px 1fr;gap:10px;align-items:center;padding:6px 0;counter-increment:s}
+.steps li::before{content:counter(s);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--paper);border:1px solid var(--line)}
+.steps li.done::before{content:"✓";background:var(--ok-bg);color:var(--ok);border-color:transparent}
+.steps li.running::before{background:var(--accent);color:#fff;border-color:transparent}
+.steps li.failed::before{content:"!";background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.steps small{color:var(--muted)}
+.vhead{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
+@media (max-width:1200px){.vhead{grid-template-columns:1fr}}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;padding:9px 12px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);background:var(--paper)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td input.h{width:62px;text-align:right;border:1px solid var(--line);border-radius:var(--r-sm);padding:3px 5px}
+.quote{font-family:var(--read);font-size:14px;background:linear-gradient(transparent 58%,var(--mark) 58%);}
+.ref{font-size:12px;color:var(--muted);margin-top:2px}
+.ref.unverified{color:var(--bad)}
+.issues{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-direction:column;gap:6px}
+.issues li{padding:7px 10px;border-radius:var(--r-sm);font-size:13px;border-left:4px solid}
+.issues .block{background:var(--bad-bg);border-color:var(--bad);color:#7A1A14}
+.issues .warn{background:var(--warn-bg);border-color:#D79A1E;color:#6B4000}
+.issues .info{background:var(--paper);border-color:var(--line);color:var(--muted)}
+.approval label{display:block;font-size:13px;color:var(--muted);margin:8px 0 4px}
+.approval input[type=text]{width:100%;border:1px solid var(--line);border-radius:var(--r-sm);padding:7px 9px}
+.approval .ack{display:flex;gap:8px;align-items:flex-start;color:var(--bad);font-size:13px;margin-top:8px}
+.big{font-size:28px;font-weight:700;letter-spacing:-.02em}
+.kpis{display:flex;gap:24px;flex-wrap:wrap;margin:6px 0 12px}
+.kpis div small{display:block;color:var(--muted);font-size:13px}
+.doc{font-family:var(--read);font-size:17px;line-height:1.6;max-width:80ch}
+.doc h1{font-family:var(--ui);font-size:24px;margin:0 0 6px}
+.doc h2{font-family:var(--ui);font-size:19px;margin:26px 0 8px}
+.doc h3{font-family:var(--ui);font-size:16px;margin:18px 0 6px}
+.doc table{font-family:var(--ui);font-size:13px;margin:8px 0}
+.doc blockquote{margin:12px 0;padding:8px 14px;background:var(--warn-bg);color:var(--warn);border-radius:var(--r-sm);font-family:var(--ui);font-size:14px}
+.doc code{font-size:13px}
+form.add{display:grid;gap:8px}
+form.add input,form.add select,form.add textarea{border:1px solid var(--line);border-radius:var(--r-sm);padding:7px 9px;background:var(--paper)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.empty{color:var(--muted);padding:22px;border:1px dashed var(--line);border-radius:var(--r-md)}
+.banner{padding:10px 14px;border-radius:var(--r-md);background:var(--warn-bg);color:var(--warn);margin-bottom:14px}
+.banner.bad{background:var(--bad-bg);color:var(--bad)}
+.banner.ok{background:var(--ok-bg);color:var(--ok)}
+.chg-added td:first-child{box-shadow:inset 4px 0 0 var(--ok)}
+.chg-removed td:first-child{box-shadow:inset 4px 0 0 var(--bad)}
+.chg-modified td:first-child{box-shadow:inset 4px 0 0 #D79A1E}
+del{background:var(--bad-bg);text-decoration:line-through}
+ins{background:var(--ok-bg);text-decoration:none}
+.spinner{width:13px;height:13px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;animation:spin .8s linear infinite;vertical-align:-2px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="brand">Consultant Desk <small>Scope builder</small></div>
+  <nav class="nav" aria-label="Apps">
+    <a href="http://localhost:8001/">Knowledge</a>
+    <a href="http://localhost:3002/">Inbox</a>
+    <a href="http://localhost:8003/" aria-current="page">Scope builder</a>
+  </nav>
+  <div class="health" id="health"><span class="pill">Checking services…</span></div>
+</div>
+<div class="layout">
+  <aside class="projects" aria-label="Projects">
+    <h2>Projects</h2>
+    <div id="projList"></div>
+    <div class="row" style="margin-top:10px">
+      <button class="btn small" id="demo">Load sample meetings</button>
+      <button class="btn quiet small" id="newProj">New project</button>
+    </div>
+  </aside>
+  <main id="main"><div class="empty">Load the sample meetings or create a project to start.</div></main>
+</div>
+<script>
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const FEAS = { existing_configuration: ["Platform setting / add-on", "ok"], existing_with_limitation: ["Platform feature, with limits", "blue"],
+  custom_development: ["Custom development", "warn"], needs_clarification: ["To be confirmed", "bad"] };
+const APPROACH = { configuration: "Configuration", custom_development: "Custom development", mixed: "Configuration + custom", to_be_confirmed: "To be confirmed" };
+const STATUS = { draft: ["Draft", "warn"], approved: ["Approved", "ok"], sent: ["Sent to client", "ok"], superseded: ["Superseded", ""] };
+let state = { project: null, version: null, tab: "proposal", polling: null };
+const who = () => { try { return localStorage.getItem("reviewer") || ""; } catch { return ""; } };
+const remember = (v) => { try { localStorage.setItem("reviewer", v); } catch {} };
+
+async function api(path, opts = {}) {
+  const r = await fetch(path, { headers: { "Content-Type": "application/json" }, ...opts });
+  const b = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(typeof b?.error?.message === "string" ? b.error.message : JSON.stringify(b?.error?.message ?? r.status));
+  return b;
+}
+const post = (p, b = {}) => api(p, { method: "POST", body: JSON.stringify(b) });
+
+async function health() {
+  try {
+    const h = await api("/health");
+    const llm = h.llm_provider === "fake" ? `<span class="pill warn">Demo model (fake)</span>` : h.llm_provider === "unconfigured" ? `<span class="pill bad">No model key</span>` : `<span class="pill ok">Claude ${esc(h.models.scope)}</span>`;
+    $("#health").innerHTML = `${h.kb.ok ? `<span class="pill ok">Knowledge Brain connected${h.kb.articles ? `, ${h.kb.articles} articles` : ""}</span>` : `<span class="pill bad">Knowledge Brain unreachable</span>`}${llm}<span class="pill">${esc(h.rate.currency)} ${h.rate.hourly}/h</span>`;
+  } catch { $("#health").innerHTML = `<span class="pill bad">Service not responding</span>`; }
+}
+
+async function loadProjects() {
+  const { projects } = await api("/projects");
+  $("#projList").innerHTML = projects.length ? projects.map((p) => `<button class="proj" data-id="${p.id}" aria-current="${state.project === p.id}">${esc(p.name)}<small>${esc(p.client)}, ${p.meetings} meeting(s), ${p.versions} version(s)</small></button>`).join("") : `<p style="color:var(--muted);font-size:14px;margin:4px">No projects yet.</p>`;
+  $$(".proj").forEach((b) => b.addEventListener("click", () => openProject(Number(b.dataset.id))));
+}
+
+async function openProject(id, keepVersion = false) {
+  state.project = id;
+  if (!keepVersion) state.version = null;
+  $$(".proj").forEach((b) => b.setAttribute("aria-current", String(Number(b.dataset.id) === id)));
+  const d = await api(`/projects/${id}`);
+  const running = d.jobs.find((j) => j.status === "running");
+  const lastJob = d.jobs[0];
+  $("#main").innerHTML = `
+    <h1>${esc(d.project.name)}</h1><p class="sub">${esc(d.project.client)}${d.approved_version ? `. Approved baseline: version ${d.versions.find((v) => v.id === d.approved_version)?.number}` : ". No approved scope yet"}</p>
+    <div class="two">
+      <section class="card"><h2>Meetings</h2>
+        ${d.meetings.map((m) => `<div class="item"><div class="grow"><b>${esc(m.title)}</b><br><small>${esc(m.meeting_date || "undated")}, ${(m.chars / 1000).toFixed(1)}k characters</small></div>
+          <span class="chip ${m.kind === "follow_up" ? "blue" : ""}">${m.kind === "follow_up" ? "Follow-up" : "Initial"}</span>
+          <button class="btn small" data-analyse="${esc(m.id)}" ${running ? "disabled" : ""}>${m.kind === "follow_up" ? "Compare with approved scope" : "Build scope"}</button></div>`).join("") || `<div class="empty">No meetings yet.</div>`}
+        <details style="margin-top:10px"><summary style="cursor:pointer;color:var(--muted)">Add a meeting transcript</summary>
+          <form class="add" id="addMeeting" style="margin-top:8px">
+            <input name="title" placeholder="Meeting title" required>
+            <div class="row"><input name="date" type="date"><select name="kind"><option value="initial">Initial meeting</option><option value="follow_up">Follow-up (changes an approved scope)</option></select></div>
+            <input type="file" id="file" accept=".txt,.md,.vtt">
+            <textarea name="transcript" rows="6" placeholder="[00:00:05] Speaker Name: what they said…&#10;Optional header lines: # Participants: Name (Client - role), Name (Northstar - role)" required minlength="50"></textarea>
+            <button class="btn small">Add meeting</button>
+          </form></details>
+      </section>
+      <section class="card"><h2>Versions</h2>
+        ${d.versions.slice().reverse().map((v) => `<div class="item"><div class="grow"><b>Version ${v.number}</b> <small>${v.kind === "revision" ? `revision of v${d.versions.find((x) => x.id === v.based_on)?.number ?? "?"}` : "baseline"}, ${esc(v.created_at)}</small><br>
+          <small>${v.summary.deliverables} deliverables, ${v.summary.hours} h, ${esc(v.summary.currency)} ${Number(v.summary.price || 0).toLocaleString()}${v.summary.blocking_issues ? `, <span style="color:var(--bad)">${v.summary.blocking_issues} blocking</span>` : ""}</small></div>
+          <span class="chip ${STATUS[v.status][1]}">${STATUS[v.status][0]}</span><button class="btn quiet small" data-open="${v.id}">Open</button></div>`).join("") || `<div class="empty">Build the scope from a meeting to create version 1.</div>`}
+      </section>
+    </div>
+    ${lastJob ? jobCard(lastJob) : ""}
+    <div id="version"></div>`;
+  $$("[data-analyse]").forEach((b) => b.addEventListener("click", () => analyse(b.dataset.analyse)));
+  $$("[data-open]").forEach((b) => b.addEventListener("click", () => openVersion(Number(b.dataset.open))));
+  $("#file")?.addEventListener("change", async (e) => { const f = e.target.files[0]; if (f) $("[name=transcript]").value = await f.text(); });
+  $("#addMeeting")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = Object.fromEntries(new FormData(e.target));
+    try { await post(`/projects/${id}/meetings`, { title: f.title, date: f.date || null, kind: f.kind, transcript: f.transcript }); openProject(id); }
+    catch (err) { alert(err.message); }
+  });
+  if (running) poll(running.id);
+  const target = state.version || (d.versions.length ? d.versions[d.versions.length - 1].id : null);
+  if (target) openVersion(target);
+}
+
+function jobCard(j) {
+  const label = { extract: "Read transcript", merge: "Requirements", change: "Compare with baseline", feasibility: "Platform check", scope: "Scope", estimate: "Estimate", proposal: "Proposal", review: "Review" };
+  return `<section class="card" id="job"><h2>${j.status === "running" ? `<span class="spinner"></span> Building` : j.status === "failed" ? "Last run failed" : "Last run"} <small style="font-weight:400;color:var(--muted)">${esc(j.meeting_id)}</small></h2>
+    <ol class="steps">${j.stages.map((s) => `<li class="${s.status}"><b>${label[s.name] || s.name}</b><small>${esc(s.detail || (s.status === "running" ? "working…" : s.status))}</small></li>`).join("")}</ol>
+    ${j.error ? `<div class="banner bad" style="margin:10px 0 0">${esc(j.error)}</div>` : ""}</section>`;
+}
+
+async function analyse(meetingId) {
+  try { const j = await post(`/meetings/${encodeURIComponent(meetingId)}/analyse`); await openProject(state.project); poll(j.id); }
+  catch (e) { alert(e.message); }
+}
+
+function poll(jobId) {
+  clearTimeout(state.polling);
+  state.polling = setTimeout(async () => {
+    const j = await api(`/jobs/${jobId}`);
+    const el = $("#job");
+    if (el) el.outerHTML = jobCard(j);
+    if (j.status === "running") poll(jobId);
+    else { state.version = j.version_id; await loadProjects(); await openProject(state.project, true); }
+  }, 1500);
+}
+
+async function openVersion(vid) {
+  state.version = vid;
+  const v = await api(`/versions/${vid}`);
+  const p = v.payload;
+  const issues = p.review_issues;
+  const blocks = issues.filter((i) => i.severity === "block");
+  const e = p.estimate;
+  const tabs = [["proposal", "Proposal"], ["requirements", `Requirements (${p.requirements.requirements.length})`], ["platform", "Platform check"], ["scope", "Scope"], ["estimate", "Estimate"], ...(p.change_report ? [["changes", "Changes"]] : []), ["usage", "Cost and speed"]];
+  if (!tabs.find((t) => t[0] === state.tab)) state.tab = "proposal";
+  $("#version").innerHTML = `<div class="vhead">
+    <section class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Version ${v.number} <span class="chip ${STATUS[v.status][1]}">${STATUS[v.status][0]}</span></h2>
+      <a class="btn quiet small" href="/versions/${vid}/markdown" target="_blank" rel="noopener">Open as Markdown</a></div>
+      <div class="kpis"><div><span class="big">${e.total_with_contingency}</span> h<small>expected incl. ${e.contingency_pct}% contingency</small></div>
+      <div><span class="big">${esc(e.currency)} ${Math.round(e.price_expected).toLocaleString()}</span><small>indicative, range ${Math.round(e.price_low).toLocaleString()} to ${Math.round(e.price_high).toLocaleString()}</small></div>
+      <div><span class="big">${p.scope.deliverables.length}</span><small>deliverables</small></div></div>
+      <div class="tabs" role="tablist">${tabs.map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${state.tab === k}">${l}</button>`).join("")}</div>
+      <div id="tabBody"></div></section>
+    <section class="card approval"><h2>Review and approval</h2>
+      ${issues.length ? `<ul class="issues">${issues.map((i) => `<li class="${i.severity}">${esc(i.message)}</li>`).join("")}</ul>` : `<p style="color:var(--muted)">No issues found by the checks.</p>`}
+      ${v.status === "draft" ? `
+        <label for="rev">Approved by</label><input type="text" id="rev" value="${esc(who())}" placeholder="Your name">
+        ${blocks.length ? `<label class="ack"><input type="checkbox" id="ack"> I've reviewed the ${blocks.length} blocking issue(s) and accept them.</label>` : ""}
+        <div class="row" style="margin-top:10px"><button class="btn" id="approve">Approve version ${v.number}</button></div>
+        <p style="font-size:13px;color:var(--muted)">Nothing reaches the client until a person approves it. Editing an approved version sends it back to draft.</p>`
+      : v.status === "approved" ? `<div class="banner ok">Approved by ${esc(v.approved_by)} at ${esc(v.approved_at)} UTC.</div>
+        <label for="sender">Sent by</label><input type="text" id="sender" value="${esc(who())}">
+        <div class="row" style="margin-top:10px"><button class="btn" id="send">Send to client</button></div>
+        <p style="font-size:13px;color:var(--muted)">Sending is simulated: the proposal is saved as a Markdown file in data/sent/.</p>`
+      : v.status === "sent" ? `<div class="banner ok">Sent by ${esc(v.sent_by)} at ${esc(v.sent_at)} UTC<br><small>${esc(v.sent_path)}</small></div>`
+      : `<div class="banner">Superseded by a newer approved version.</div>`}
+    </section></div>`;
+  $$("[data-tab]").forEach((b) => b.addEventListener("click", () => { state.tab = b.dataset.tab; $$("[data-tab]").forEach((x) => x.setAttribute("aria-selected", String(x === b))); renderTab(v); }));
+  renderTab(v);
+  $("#approve")?.addEventListener("click", async () => {
+    const r = $("#rev").value.trim(); if (!r) return $("#rev").focus(); remember(r);
+    try { await post(`/versions/${vid}/approve`, { reviewer: r, acknowledge_blocks: $("#ack")?.checked ?? false }); await loadProjects(); openProject(state.project, true); }
+    catch (err) { alert(err.message); }
+  });
+  $("#send")?.addEventListener("click", async () => {
+    const s = $("#sender").value.trim(); if (!s) return $("#sender").focus(); remember(s);
+    try { await post(`/versions/${vid}/send`, { sender: s }); openProject(state.project, true); } catch (err) { alert(err.message); }
+  });
+}
+
+function srcRefs(sources) {
+  return sources.map((s) => `<div class="ref ${s.verified ? "" : "unverified"}">L${s.line} ${esc(s.speaker || "")} ${esc(s.timestamp || "")}${s.verified ? "" : " (quote not found at this line)"}: <span class="quote">${esc(s.quote)}</span></div>`).join("");
+}
+
+function renderTab(v) {
+  const p = v.payload, body = $("#tabBody");
+  const req = Object.fromEntries(p.requirements.requirements.map((r) => [r.id, r]));
+  const feas = Object.fromEntries(p.feasibility.map((f) => [f.requirement_id, f]));
+  if (state.tab === "proposal") body.innerHTML = `<div class="doc">${md(v.markdown)}</div>`;
+  if (state.tab === "requirements") body.innerHTML = `<table><thead><tr><th>Requirement</th><th>Status</th><th>Evidence from the meeting</th></tr></thead><tbody>
+    ${p.requirements.requirements.map((r) => `<tr><td><b>${r.id} ${esc(r.title)}</b>${r.out_of_scope_change ? ` <span class="chip warn">change request</span>` : ""}<br>${esc(r.description)}
+      ${r.acceptance_criteria.length ? `<div class="ref">Accepted when: ${r.acceptance_criteria.map(esc).join("; ")}</div>` : ""}${r.open_questions.length ? `<div class="ref">Open: ${r.open_questions.map(esc).join("; ")}</div>` : ""}</td>
+      <td><span class="chip ${r.status === "confirmed" ? "ok" : r.status === "removed" ? "" : "warn"}">${esc(r.status)}</span><br><small>${esc(r.priority.replace("_", " "))}, ${esc(r.origin)}</small></td>
+      <td>${srcRefs(r.sources)}</td></tr>`).join("")}</tbody></table>
+    ${[["Constraints", p.requirements.constraints], ["Decisions", p.requirements.decisions], ["Open questions", p.requirements.open_questions], ["Commitments", p.requirements.commitments], ["Out of scope", p.requirements.exclusions]]
+      .filter(([, xs]) => xs.length).map(([t, xs]) => `<h3>${t}</h3>${xs.map((x) => `<div style="margin-bottom:6px">${x.kind ? `<span class="chip">${esc(x.kind)}</span> ` : ""}${esc(x.text)}${srcRefs(x.sources.slice(0, 1))}</div>`).join("")}`).join("")}`;
+  if (state.tab === "platform") body.innerHTML = `<p style="margin-top:0;color:var(--muted)">Each requirement was looked up in the Knowledge Brain before estimating. A lookup that finds nothing does not prove a feature is missing, so those are marked "to be confirmed", not custom.</p>
+    <table><thead><tr><th>Requirement</th><th>Result</th><th>Evidence</th></tr></thead><tbody>
+    ${p.feasibility.map((f) => `<tr><td><b>${f.requirement_id}</b> ${esc(req[f.requirement_id]?.title)}</td>
+      <td><span class="chip ${FEAS[f.classification][1]}">${FEAS[f.classification][0]}</span><br><small>${f.verified ? "verified in help centre" : "not verified"}</small><div class="ref">${esc(f.rationale)}</div></td>
+      <td><small>Knowledge Brain: ${esc(f.kb_status.replace(/_/g, " "))}${f.kb_escalation_id ? `, expert task #${f.kb_escalation_id}` : ""}</small>${f.kb_sources.map((s) => `<div><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></div>`).join("")}</td></tr>`).join("")}</tbody></table>`;
+  if (state.tab === "scope") {
+    const s = p.scope;
+    body.innerHTML = `<p class="doc" style="font-size:16px;margin-top:0">${esc(s.proposed_solution)}</p>${s.deliverables.map((d) => `<div class="card" style="margin-bottom:10px"><b>${d.id} ${esc(d.title)}</b> <span class="chip">${APPROACH[d.approach]}</span><div>${esc(d.description)}</div>
+      <div class="ref">Covers ${d.requirement_ids.map((r) => `${r} ${esc(req[r]?.title)}`).join(", ")}</div><ul style="margin:6px 0 0;padding-left:18px">${d.acceptance_criteria.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></div>`).join("")}
+      ${[["Waiting for client confirmation", s.pending_confirmation.map((r) => `${r} ${req[r]?.title ?? ""}`)], ["Not included", s.exclusions], ["Assumptions", s.assumptions], ["Dependencies", s.dependencies], ["Client responsibilities", s.client_responsibilities], ["Timeline", s.timeline], ["Risks", s.risks], ["Open questions", s.open_questions]]
+        .filter(([, xs]) => xs.length).map(([t, xs]) => `<h3>${t}</h3><ul style="margin:0;padding-left:18px">${xs.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`).join("")}`;
+  }
+  if (state.tab === "estimate") {
+    const e = p.estimate, editable = v.status === "draft" || v.status === "approved";
+    body.innerHTML = `${v.status === "approved" ? `<div class="banner">Changing hours sends this approved version back to draft.</div>` : ""}
+    <table><thead><tr><th>Task</th><th>Why</th><th class="num">Low</th><th class="num">Likely</th><th class="num">High</th><th></th></tr></thead><tbody>
+    ${e.tasks.map((t) => `<tr data-task="${t.id}"><td><b>${t.id}</b> ${esc(t.name)}<div class="ref">${t.deliverable_id} ${esc(p.scope.deliverables.find((d) => d.id === t.deliverable_id)?.title)}, ${esc(t.category.replace("_", " "))}, ${t.confidence} confidence</div></td><td><small>${esc(t.rationale)}</small></td>
+      ${["low", "likely", "high"].map((k) => `<td class="num">${editable ? `<input class="h" type="number" min="0.5" step="0.5" name="${k}" value="${t[k]}" aria-label="${k} hours">` : t[k]}</td>`).join("")}
+      <td>${editable ? `<button class="btn quiet small" data-save="${t.id}">Save</button>` : ""}</td></tr>`).join("")}
+    <tr><td colspan="2"><b>Total</b></td><td class="num"><b>${e.total_low}</b></td><td class="num"><b>${e.total_likely}</b></td><td class="num"><b>${e.total_high}</b></td><td></td></tr></tbody></table>
+    <p>Weighted estimate ${e.total_expected} h + ${e.contingency_pct}% contingency (${e.contingency_hours} h) = <b>${e.total_with_contingency} h</b>, about <b>${esc(e.currency)} ${Math.round(e.price_expected).toLocaleString()}</b> at ${e.hourly_rate}/h.</p>
+    <ul style="color:var(--muted);font-size:14px">${e.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>`;
+    $$("[data-save]").forEach((b) => b.addEventListener("click", async () => {
+      const row = b.closest("tr"), val = (k) => Number($(`[name=${k}]`, row).value);
+      const editor = who() || prompt("Your name (recorded with the change)"); if (!editor) return; remember(editor);
+      try { await api(`/versions/${v.id}/tasks/${row.dataset.task}`, { method: "PATCH", body: JSON.stringify({ low: val("low"), likely: val("likely"), high: val("high"), editor }) }); openProject(state.project, true); }
+      catch (err) { alert(err.message); }
+    }));
+  }
+  if (state.tab === "changes") {
+    const c = p.change_report;
+    body.innerHTML = `<div class="banner ${c.items.some((i) => i.out_of_scope) ? "" : "ok"}">${esc(c.summary)}</div>
+      ${c.schedule_change ? `<p><b>Schedule:</b> <del>${esc(c.schedule_change.before)}</del> <ins>${esc(c.schedule_change.after)}</ins></p>` : ""}
+      <table><thead><tr><th>Change</th><th>Before (approved v${c.baseline_version})</th><th>After</th><th class="num">Hours (approx.)</th></tr></thead><tbody>
+      ${c.items.map((i) => `<tr class="chg-${i.change_type}"><td><b>${esc(i.change_type)}</b> ${i.requirement_id}<br>${esc(i.title)}${i.out_of_scope ? `<br><span class="chip warn">outside approved scope: quote separately</span>` : ""}<div class="ref">${esc(i.explanation)}</div>${srcRefs(i.sources.slice(-1))}</td>
+        <td>${i.before ? `<small>${esc(i.before)}</small>` : "–"}</td><td>${i.after ? `<small>${esc(i.after)}</small>` : "–"}</td><td class="num">${i.hours_before} → ${i.hours_after}</td></tr>`).join("")}
+      </tbody></table>${c.other_changes.length ? `<h3>Other changes</h3><ul>${c.other_changes.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+      <p>Total expected effort: ${c.hours_before} h → <b>${c.hours_after} h</b>.</p>`;
+  }
+  if (state.tab === "usage") {
+    const u = p.usage;
+    body.innerHTML = `<p style="margin-top:0">${u.calls} model calls, ${u.input_tokens.toLocaleString()} input / ${u.output_tokens.toLocaleString()} output tokens, <b>$${u.cost_usd.toFixed(4)}</b>, ${(u.latency_ms / 1000).toFixed(1)} s of model time, ${u.retries} validation retries.</p>
+      <table><thead><tr><th>Stage</th><th>Model</th><th class="num">Calls</th><th class="num">Tokens in / out</th><th class="num">Cost</th><th class="num">Seconds</th></tr></thead><tbody>
+      ${Object.entries(u.by_stage).map(([k, s]) => `<tr><td>${esc(k)}</td><td>${esc(s.model || "")}</td><td class="num">${s.calls}</td><td class="num">${s.input_tokens ?? "–"} / ${s.output_tokens ?? "–"}</td><td class="num">$${(s.cost_usd || 0).toFixed(4)}</td><td class="num">${s.latency_ms ? (s.latency_ms / 1000).toFixed(1) : "–"}</td></tr>`).join("")}</tbody></table>
+      <p style="color:var(--muted);font-size:14px">Prompt versions: ${Object.values(p.prompt_versions).map(esc).join(", ")}</p>`;
+  }
+}
+
+// Minimal Markdown renderer for the proposal preview (headings, lists, tables, bold, links, blockquotes).
+function md(src) {
+  const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/ {2}$/, "<br>");
+  const lines = src.split("\n"); let html = "", i = 0;
+  while (i < lines.length) {
+    const l = lines[i];
+    if (/^#{1,3} /.test(l)) { const n = l.match(/^#+/)[0].length; html += `<h${n}>${inline(l.slice(n + 1))}</h${n}>`; i++; continue; }
+    if (l.startsWith("|")) {
+      const rows = []; while (i < lines.length && lines[i].startsWith("|")) rows.push(lines[i++]);
+      const cells = (r) => r.slice(1, -1).split(" | ").map((c) => c.trim());
+      html += `<table><thead><tr>${cells(rows[0]).map((c) => `<th>${inline(c)}</th>`).join("")}</tr></thead><tbody>${rows.slice(2).map((r) => `<tr>${cells(r).map((c) => `<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table>`; continue;
+    }
+    if (/^(- |\d+\. )/.test(l)) {
+      const ordered = /^\d+\. /.test(l), items = [];
+      while (i < lines.length && /^(- |\d+\. )/.test(lines[i])) items.push(lines[i++].replace(/^(- |\d+\. )/, ""));
+      html += `<${ordered ? "ol" : "ul"}>${items.map((x) => `<li>${inline(x)}</li>`).join("")}</${ordered ? "ol" : "ul"}>`; continue;
+    }
+    if (l.startsWith("> ")) { html += `<blockquote>${inline(l.slice(2))}</blockquote>`; i++; continue; }
+    if (l.trim() === "---") { html += "<hr>"; i++; continue; }
+    if (!l.trim()) { i++; continue; }
+    const para = []; while (i < lines.length && lines[i].trim() && !/^(#|\||- |\d+\. |> |---)/.test(lines[i])) para.push(lines[i++]);
+    html += `<p>${para.map(inline).join(" ")}</p>`;
+  }
+  return html;
+}
+
+$("#demo").addEventListener("click", async () => { const r = await post("/demo/load"); await loadProjects(); if (r.projects[0]) openProject(r.projects[0].id); });
+$("#newProj").addEventListener("click", async () => {
+  const name = prompt("Project name"); if (!name) return; const client = prompt("Client name"); if (!client) return;
+  try { const p = await post("/projects", { name, client }); await loadProjects(); openProject(p.id); } catch (e) { alert(e.message); }
+});
+health(); loadProjects().then(async () => { const { projects } = await api("/projects"); if (projects[0]) openProject(projects[0].id); });
+setInterval(health, 20000);
+</script>
+</body>
+</html>

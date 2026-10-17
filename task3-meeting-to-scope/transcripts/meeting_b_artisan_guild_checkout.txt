@@ -1,0 +1,74 @@
+# Meeting: Midwest Artisan Guild - membership checkout, notifications and payments
+# Date: 2026-10-08
+# Project: Midwest Artisan Guild Directory
+# Participants: Helen Brandt (Client - Executive director, Midwest Artisan Guild), Omar Haddad (Client - Treasurer), Arjun Mehta (Northstar - Solutions consultant), Kavya Rao (Northstar - Project manager)
+# Note: role-played client meeting recorded for the capstone; all participants agreed to recording at the start.
+
+[00:00:03] Kavya Rao: Hi Helen, hi Omar. Quick check first: are you both okay with us recording this call for our notes?
+[00:00:09] Helen Brandt: Yes.
+[00:00:10] Omar Haddad: Sure.
+[00:00:12] Arjun Mehta: Thanks. So, Helen, your email said the membership signup and payments need work. Can you walk us through how it works today?
+[00:00:21] Helen Brandt: We have about six hundred members, potters, woodworkers, jewellers, weavers. They join through the website and pay a yearly membership of a hundred and twenty dollars through PayPal. That's it, one plan.
+[00:00:35] Omar Haddad: And PayPal is a headache. Members complain they have to create a PayPal account, and the fees are high. Half of them ask if they can just pay by card.
+[00:00:45] Arjun Mehta: Which PayPal integration is it - PayPal Standard where they're sent to PayPal's site?
+[00:00:50] Omar Haddad: Yes, they leave our site and go to PayPal, then come back. Some never come back.
+[00:00:56] Kavya Rao: Okay. What would you like instead?
+[00:00:59] Omar Haddad: Stripe, so people can pay by card on our site. And Apple Pay, because a lot of our younger members pay with their phones.
+[00:01:07] Helen Brandt: And at the in-person fairs we use Square for card payments at the booths. It would be great if membership payments went into Square too, so all the money is in one place.
+[00:01:18] Arjun Mehta: Let me make sure I understand. Online membership payments by card through Stripe, ideally Apple Pay, and you'd like Square as well or instead of Stripe?
+[00:01:27] Omar Haddad: As well, I suppose. Honestly, I just want card payments online. Square was Helen's idea for bookkeeping.
+[00:01:34] Helen Brandt: If Square is complicated, Stripe is fine. I just want one report of all the money.
+[00:01:40] Arjun Mehta: Okay. I'll check which gateways the platform supports. I'm fairly sure Stripe is supported; I'm not sure about Square. We'll come back with options rather than guess.
+[00:01:50] Kavya Rao: Noted: Stripe card payments online is the priority. Apple Pay should-have. Square is open, to be checked, and it's more a reporting wish than a payment need.
+[00:02:00] Omar Haddad: Correct.
+[00:02:02] Arjun Mehta: What happens with your existing members who pay through PayPal subscriptions? Are they recurring yearly payments?
+[00:02:09] Omar Haddad: About four hundred of them are on automatic yearly renewal in PayPal.
+[00:02:14] Arjun Mehta: That's important. Switching the payment gateway doesn't necessarily move existing subscriptions over, so we need a plan for those four hundred renewals. Let me check the platform documentation on that before we promise anything.
+[00:02:26] Omar Haddad: Please. I don't want four hundred people to stop paying.
+[00:02:30] Kavya Rao: I'll add that as a risk and an open question: migration of the existing PayPal recurring subscriptions.
+[00:02:36] Helen Brandt: Next is the plans. We want a monthly option. Some artists can't pay a hundred and twenty at once. Ten dollars a month or a hundred and twenty a year, and the yearly one should be a bit cheaper, maybe a hundred and eight.
+[00:02:50] Arjun Mehta: So two membership plans, monthly and annual, with the annual discounted.
+[00:02:55] Helen Brandt: Yes. Same benefits, just the billing period is different.
+[00:02:59] Kavya Rao: Do the benefits differ at all?
+[00:03:02] Helen Brandt: No, the same profile, the same listing in the directory.
+[00:03:06] Arjun Mehta: That's probably configuration of membership plans rather than development. I'll confirm.
+[00:03:11] Omar Haddad: And coupon codes. For the fair in January we want to give new members a first-year discount code, like FAIR2027 for twenty percent off.
+[00:03:20] Arjun Mehta: Only for new members, only the first year?
+[00:03:24] Omar Haddad: Yes, first payment only. Then normal price.
+[00:03:28] Kavya Rao: Okay. Coupon code at checkout for new members, discount applies to the first payment only.
+[00:03:34] Helen Brandt: Then notifications. When someone joins and pays, nobody on our side knows unless they log in to the admin. I want an email to me and Omar every time someone pays.
+[00:03:45] Arjun Mehta: An admin notification email for each new paid signup and each renewal?
+[00:03:50] Omar Haddad: Signups and renewals, yes. And failed renewals, those are important for me.
+[00:03:55] Kavya Rao: Notifications for new paid signup, renewal, and failed renewal, to Helen and Omar.
+[00:04:01] Helen Brandt: And the receipt the member gets is ugly. It doesn't have our logo or the guild's address, and some members need a proper receipt for their taxes.
+[00:04:11] Arjun Mehta: So a branded member receipt email with logo, the guild's address and the payment details.
+[00:04:17] Helen Brandt: Yes. And they should be able to download an invoice from their account.
+[00:04:21] Arjun Mehta: I think members can already download invoices; I'll check and if so we'll just make sure it's switched on and branded.
+[00:04:28] Kavya Rao: Good.
+[00:04:30] Helen Brandt: The bigger one: booth reservations for the January fair. Members should be able to reserve a booth during checkout. Small booth seventy-five dollars, large booth a hundred and fifty. There are only sixty booths.
+[00:04:44] Arjun Mehta: So that's selling a limited number of booth spots, with two sizes, and it needs to stop when the sixty are gone?
+[00:04:51] Helen Brandt: Yes, and we need a list of who reserved which booth.
+[00:04:55] Arjun Mehta: That's beyond a normal membership checkout. It's closer to an event or inventory feature. It could be custom development, or there may be a simpler way with a separate paid form. I'd like to look into it before saying more.
+[00:05:08] Omar Haddad: Is it a lot of work?
+[00:05:10] Arjun Mehta: I don't want to guess on the call. We'll come back with the options and an estimate in the proposal.
+[00:05:16] Helen Brandt: Okay. But it needs to be ready when fair registration opens on January 15th. That date can't move, the fair is printed on the flyers already.
+[00:05:26] Kavya Rao: January 15th, 2027, registration opens. Is that the deadline for everything or only for booths and coupons?
+[00:05:33] Helen Brandt: Booths and the coupon code have to be ready by then. Stripe and the monthly plan should be before that, ideally in December so we can test.
+[00:05:42] Kavya Rao: Okay, so the hard deadline is January 15th for booth reservations and the coupon; card payments and plans ideally in December.
+[00:05:50] Omar Haddad: And one more idea. People who start the signup and don't finish - can we email them a reminder? Like the abandoned cart emails shops send.
+[00:06:00] Arjun Mehta: Abandoned checkout reminders. I'd need to check whether the platform tracks unfinished signups at all. It could be quite custom.
+[00:06:08] Omar Haddad: Then it's a nice-to-have. Don't let it delay the rest.
+[00:06:12] Kavya Rao: Optional, then.
+[00:06:14] Arjun Mehta: On taxes: do you charge sales tax on memberships or booths?
+[00:06:18] Omar Haddad: I need to check with our accountant. I think booths might be taxable.
+[00:06:23] Kavya Rao: Open question: sales tax on booths and memberships, Omar to confirm with the accountant.
+[00:06:29] Arjun Mehta: And who will set up the Stripe account? It needs the guild's bank details and verification.
+[00:06:34] Omar Haddad: I'll do that, I'm the treasurer.
+[00:06:37] Kavya Rao: Client responsibility: Omar creates and verifies the Stripe account and gives us access. That can take a few days, so please start soon.
+[00:06:45] Helen Brandt: Budget-wise, we don't have a number yet. Omar needs to see the numbers and the board approves anything over five thousand dollars.
+[00:06:53] Omar Haddad: So please split it so we can choose. Must-haves first.
+[00:06:57] Kavya Rao: We'll split it into must-haves and optional items with separate estimates.
+[00:07:02] Kavya Rao: Let me summarise. Must-haves: Stripe card payments on the site; monthly and annual membership plans with the annual discounted; coupon code for new members' first payment; admin email notifications for new paid signups, renewals and failed renewals; branded member receipt; booth reservations for the January fair with two sizes and a limit of sixty. Should-have: Apple Pay. Open: Square, migration of the four hundred PayPal recurring subscriptions, sales tax. Optional: abandoned checkout reminders. Hard deadline January 15th, 2027 for booths and the coupon.
+[00:07:38] Helen Brandt: Yes. And invoices downloadable by members.
+[00:07:41] Kavya Rao: And downloadable invoices, if not already working. We'll send the proposal next week.
+[00:07:46] Omar Haddad: Thank you both.

@@ -1,0 +1,106 @@
+# Meeting: Bayside Home Services - search and mobile improvements (discovery call)
+# Date: 2026-10-05
+# Project: Bayside Home Services Directory
+# Participants: Rachel Kim (Client - Owner, Bayside Home Services), Dev Shah (Client - Marketing lead), Arjun Mehta (Northstar - Solutions consultant), Kavya Rao (Northstar - Project manager)
+# Note: role-played client meeting recorded for the capstone; all participants agreed to recording at the start.
+
+[00:00:04] Arjun Mehta: Thanks for making time, Rachel, Dev. Before we start, is everyone okay with us recording this so we can write up the scope accurately?
+[00:00:11] Rachel Kim: Yes, that's fine.
+[00:00:13] Dev Shah: Fine by me.
+[00:00:16] Kavya Rao: Great. I'll keep notes too. The plan is to understand what's not working today, what you'd like to change, and any timing or budget limits, and then we'll come back with a written scope and estimate.
+[00:00:31] Arjun Mehta: So to start: the directory has been live for about two years on Brilliant Directories, right? How big is it now?
+[00:00:38] Rachel Kim: Right, two years in January. We have about eighteen hundred contractors listed. Plumbers, electricians, HVAC, roofers, handymen, a few landscapers. Mostly in the Bay Area, some in Sacramento.
+[00:00:52] Arjun Mehta: And what made you reach out now?
+[00:00:56] Rachel Kim: Honestly, the search isn't great. Homeowners come to the site, type something, and they don't find the right person. We get emails saying "I searched for water heater and got a landscaper."
+[00:01:10] Dev Shah: Our Google Analytics shows a lot of people leave right after the search results page. The bounce rate on search results is something like sixty-five percent.
+[00:01:19] Arjun Mehta: Okay. When you say they search for "water heater", where do they type that? The main keyword box on the home page?
+[00:01:26] Dev Shah: Yes, the big search bar on the home page and the one at the top of the results page.
+[00:01:32] Arjun Mehta: And the contractors - do their profiles say what they specialize in? Like "water heater installation"?
+[00:01:38] Rachel Kim: Some do, in their description. We never had a proper specialties field. They just pick a category like "Plumbing" and write whatever they want in the about section.
+[00:01:49] Arjun Mehta: That's probably a big part of it. If the search can only match the category name and free text, "water heater" won't line up with "Plumbing".
+[00:01:58] Kavya Rao: So one thing we'd want is for search to match what people type to the services contractors actually offer.
+[00:02:05] Rachel Kim: Exactly. If I type "water heater", I want plumbers who do water heaters, near me, at the top. That's the main thing. That's a must for us.
+[00:02:14] Arjun Mehta: Understood. Would you be able to get specialties data from the contractors? For example a list of services per contractor?
+[00:02:21] Rachel Kim: We could email them a form. Or Dev could put together a spreadsheet from what's in their descriptions.
+[00:02:28] Dev Shah: I could do a first pass with a spreadsheet, yes. Probably not perfect for all eighteen hundred though.
+[00:02:35] Kavya Rao: Okay, I'll note that the specialties data would come from your side, and we'd import it. We should agree on a deadline for that, because the search work depends on it.
+[00:02:44] Rachel Kim: Sure.
+[00:02:47] Arjun Mehta: Next - you mentioned "near me". How does location work today? Does someone type a city or zip?
+[00:02:54] Dev Shah: There's a location box, you can type a city or zip. But the results aren't sorted by distance, it feels random. Someone in Oakland gets a contractor in San Jose first.
+[00:03:05] Arjun Mehta: So you'd like results sorted nearest first by default.
+[00:03:09] Rachel Kim: Nearest first, yes. Unless someone is searching statewide, I guess. But nearest first by default.
+[00:03:15] Arjun Mehta: That may well be a setting rather than development. I'll check how ordering and distance sorting work on the platform before we estimate anything.
+[00:03:24] Rachel Kim: Great, if it's a setting even better.
+[00:03:27] Kavya Rao: Let's talk about filters. Dev, you sent a screenshot of a competitor site before the call.
+[00:03:33] Dev Shah: Yeah, HomeFixPro. They have filters on the left: category, distance, rating, "licensed and insured", and "available 24/7 for emergencies". We'd like the same kind of thing.
+[00:03:46] Arjun Mehta: Let me go one by one. Category and distance you can partly do today, I think. Rating: do you have reviews enabled?
+[00:03:54] Rachel Kim: We do, but honestly not many contractors have reviews. Maybe a third of them.
+[00:04:00] Arjun Mehta: Okay. So a rating filter would hide two thirds of your contractors. Something to think about.
+[00:04:06] Dev Shah: Hmm. Let's keep it on the list for now, we can decide.
+[00:04:10] Kavya Rao: I'll mark the rating filter as not confirmed. What about "licensed and insured"? Is that verified by you or just a checkbox the contractor ticks?
+[00:04:18] Rachel Kim: Right now it's nothing. We'd want a badge on the profile and a filter. Ideally we verify the license number with the state board, but I don't know if that's realistic.
+[00:04:30] Arjun Mehta: Verifying against the state board is a separate piece of work, it would need an integration with the CSLB lookup or a manual process on your side. A self-declared field with a license number that your team checks manually is much simpler.
+[00:04:44] Rachel Kim: Let's start with the simple version, the contractor enters the license number, we check it manually and tick "verified" in the admin. The automatic check can be later.
+[00:04:54] Kavya Rao: Noted: licensed and insured badge plus filter, license number entered by the contractor, verified manually by Bayside admins. Automatic state-board verification is out of scope for now.
+[00:05:06] Dev Shah: And the 24/7 emergency one is really important for plumbers. People with a burst pipe at 2am.
+[00:05:12] Arjun Mehta: So a yes/no field "offers 24/7 emergency service" that contractors set on their profile, and a filter for it.
+[00:05:19] Dev Shah: Yes, and maybe show a red "24/7" label on the result card.
+[00:05:24] Rachel Kim: That would be nice.
+[00:05:26] Arjun Mehta: Okay. For the filters as a group: category, distance radius, licensed and insured, and 24/7 emergency are the confirmed ones. Rating is undecided.
+[00:05:36] Rachel Kim: Correct.
+[00:05:38] Kavya Rao: Distance radius - what options? Five, ten, twenty-five miles?
+[00:05:43] Dev Shah: Five, ten, twenty-five, fifty. Something like that.
+[00:05:47] Kavya Rao: Okay.
+[00:05:49] Arjun Mehta: Then the map. Dev's notes mention a map view.
+[00:05:53] Dev Shah: Yes, a map with pins next to the list. HomeFixPro has it. People like seeing who's close.
+[00:05:59] Arjun Mehta: Brilliant Directories has list, grid and map layouts for search results, but I believe map view needs an add-on and a Google Maps key. I'll confirm the details. Is map view a must?
+[00:06:10] Rachel Kim: I'd say should-have. If it's cheap, yes.
+[00:06:14] Arjun Mehta: Okay, should-have.
+[00:06:16] Kavya Rao: Now mobile. You mentioned mobile is a problem?
+[00:06:20] Dev Shah: Mobile is seventy percent of our traffic and the search experience on a phone is bad. The search form takes the whole screen, the filters are below all the results so nobody sees them, and you have to open a profile to find the phone number.
+[00:06:36] Arjun Mehta: So on mobile: a compact search bar that stays at the top when you scroll, filters in a panel you can open and close, and a call button directly on each result card.
+[00:06:47] Dev Shah: Exactly that. Tap to call from the results. That's how plumbers get jobs.
+[00:06:53] Rachel Kim: The tap-to-call is a must. The contractors keep asking for more calls.
+[00:06:58] Arjun Mehta: Do you track calls today?
+[00:07:01] Rachel Kim: No. It would be nice to know how many calls each contractor gets, but that's not essential right now.
+[00:07:08] Kavya Rao: I'll note call tracking as a nice-to-have, not in this phase unless it's trivial.
+[00:07:14] Rachel Kim: Okay.
+[00:07:16] Arjun Mehta: Should the mobile improvements also change the desktop look? Or keep desktop as it is?
+[00:07:22] Rachel Kim: Keep the desktop look and our branding. We like the colors and the logo. We don't want a redesign. Just make search work and make mobile usable.
+[00:07:32] Kavya Rao: That's a clear decision, thanks: no visual redesign, keep current branding.
+[00:07:37] Dev Shah: One more thing on search. Can the search box suggest things as you type? Like when you type "wat" it suggests "water heater", "water damage"?
+[00:07:46] Arjun Mehta: There's a predictive keyword search feature on the platform, I'll check what it can suggest, categories versus specialties. That might cover it with configuration.
+[00:07:56] Dev Shah: Cool.
+[00:07:58] Rachel Kim: And then - I know everyone says this - but maybe add AI as well? I saw a demo where you type "my kitchen sink is leaking under the cabinet" and it figured out you need a plumber.
+[00:08:11] Arjun Mehta: That's a natural-language search. It's doable but it's a different level of effort: we'd have to map free-text problems to categories and specialties, probably with a language model, and test it carefully. What would success look like for you?
+[00:08:25] Rachel Kim: I don't know exactly. I just think it would make us look modern. Dev?
+[00:08:30] Dev Shah: I'd want to see the numbers first. If the basic search works better, maybe we don't need AI.
+[00:08:36] Kavya Rao: So the AI search is an idea, not a confirmed requirement. We'll describe it as an optional item with open questions, and you decide after seeing the estimate.
+[00:08:46] Rachel Kim: Yes, put it as optional. If it's expensive, phase two.
+[00:08:51] Arjun Mehta: Also the "no results" problem: do you know what people search for that returns nothing?
+[00:08:57] Dev Shah: Not really. GA only shows the page, not the search term, I think.
+[00:09:02] Arjun Mehta: It would be useful to log search terms and especially the ones with zero results, so you know which specialties are missing.
+[00:09:09] Rachel Kim: Oh, that would be nice. Like a report every month. But it's a nice-to-have.
+[00:09:15] Kavya Rao: Optional: search term reporting including zero-result searches.
+[00:09:19] Kavya Rao: Can we talk about timing and budget?
+[00:09:22] Rachel Kim: Timing is important. We run a big spring campaign with radio ads starting in March. We need the new search live before that. So launch by March 1st at the latest.
+[00:09:34] Kavya Rao: March 1st, 2027, for go-live. Got it. And we'd want a couple of weeks of testing before that, so content and specialties data would need to be in by early February.
+[00:09:44] Rachel Kim: That works.
+[00:09:46] Kavya Rao: Budget?
+[00:09:48] Rachel Kim: We were thinking around eight to ten thousand dollars. But tell us what's realistic, I'd rather know.
+[00:09:55] Arjun Mehta: Understood. We'll separate what's configuration from what's custom development, so you can see where the money goes.
+[00:10:03] Dev Shah: That would help a lot. Our board wants to see options.
+[00:10:07] Kavya Rao: Who approves on your side?
+[00:10:10] Rachel Kim: Me, but I run it by our two partners. Usually takes a week.
+[00:10:15] Arjun Mehta: Okay. Any technical constraints we should know? Plugins, custom code someone else wrote?
+[00:10:21] Dev Shah: A freelancer added some custom CSS last year. And we use the Google Maps API key already for the location box.
+[00:10:29] Arjun Mehta: Good to know, we'll review the custom CSS before changing the mobile layout.
+[00:10:34] Kavya Rao: Let me summarize the confirmed items. One: search matches what people type to contractors' specialties, which needs a specialties field and data from you. Two: results sorted by distance, nearest first, by default. Three: filters for category, distance radius with 5, 10, 25 and 50 miles, licensed and insured, and 24/7 emergency. The rating filter is undecided. Four: mobile search - sticky compact search bar, collapsible filter panel, tap-to-call on result cards. Five: map view of results as a should-have. Six: licensed and insured badge with manual verification by your admins. Optional: AI natural-language search, search term reporting, call tracking. Predictive suggestions as you type, if configuration allows.
+[00:11:22] Rachel Kim: That's right. And no redesign.
+[00:11:25] Kavya Rao: And no redesign. Out of scope: automatic state-board license verification and any visual redesign.
+[00:11:31] Arjun Mehta: On our side, we'll check each item against what the platform already does, so we don't quote custom work for something that's a setting.
+[00:11:39] Kavya Rao: We'll send the written scope, task estimate and proposal by this Friday, October 9th.
+[00:11:44] Rachel Kim: Perfect. And Dev will send you the top searches we can find and a first version of the specialties spreadsheet.
+[00:11:51] Dev Shah: I can send the top searches this week. The specialties spreadsheet will take me two or three weeks.
+[00:11:57] Kavya Rao: Noted. Thanks both.
+[00:11:59] Rachel Kim: Thank you!

@@ -1,0 +1,40 @@
+# Meeting: Bayside Home Services - proposal review and changes (follow-up)
+# Date: 2026-10-14
+# Project: Bayside Home Services Directory
+# Follows: meeting_a_bayside_discovery (2026-10-05)
+# Participants: Rachel Kim (Client - Owner, Bayside Home Services), Dev Shah (Client - Marketing lead), Arjun Mehta (Northstar - Solutions consultant), Kavya Rao (Northstar - Project manager)
+# Note: role-played client meeting recorded for the capstone; all participants agreed to recording at the start.
+
+[00:00:05] Kavya Rao: Hi both, thanks for reviewing the proposal so quickly. Still okay to record?
+[00:00:09] Rachel Kim: Yes, go ahead.
+[00:00:11] Kavya Rao: Great. You said in your email you have some changes. Let's go through them.
+[00:00:17] Rachel Kim: Yes. First, the AI search. We talked with our partners and we want to drop it completely for now. The estimate showed it's a lot and we'd rather put the money into the basics.
+[00:00:29] Arjun Mehta: Okay, so the natural-language AI search is removed from this project. Not phase two, just out?
+[00:00:35] Rachel Kim: Out for now. If we want it next year we'll ask again.
+[00:00:39] Kavya Rao: Noted, removed.
+[00:00:41] Dev Shah: Second, the filters. I looked at the reviews data and only about five hundred contractors have any reviews, so the rating filter doesn't make sense. Please drop the rating filter.
+[00:00:53] Arjun Mehta: It was undecided anyway, so that's now a clear no.
+[00:00:57] Dev Shah: But we want a new filter instead: "language spoken". A lot of our customers prefer Spanish, Cantonese, Vietnamese, Tagalog speakers. Contractors would choose their languages on their profile.
+[00:01:10] Arjun Mehta: So a multi-select "languages spoken" field on the contractor profile, and a filter for it in search.
+[00:01:16] Dev Shah: Yes. And show the languages on the result card if there's space.
+[00:01:21] Kavya Rao: So the filters become: category, distance radius, licensed and insured, 24/7 emergency, and languages spoken. Rating is removed.
+[00:01:30] Rachel Kim: Correct.
+[00:01:32] Rachel Kim: Third, and this is new. A lot of homeowners want quotes from several contractors. Can we add a "get three quotes" button? The homeowner describes the job once, picks up to three contractors from the results, and all three get the request by email.
+[00:01:48] Arjun Mehta: That's a multi-contractor quote request. It wasn't in the original scope, so we'd treat it as a change request with its own estimate. The platform has some lead features I want to check first - it might partly cover this.
+[00:02:01] Rachel Kim: Understood, I expected that. Please price it separately so we can decide.
+[00:02:06] Kavya Rao: Noted as a new requirement and a change request, estimated separately.
+[00:02:11] Dev Shah: And the contractors should see those quote requests in their dashboard, not just by email.
+[00:02:16] Kavya Rao: Okay, part of the same item: requests visible in the contractor dashboard and sent by email.
+[00:02:22] Rachel Kim: Fourth, the timing changed. Our radio partner moved the spring campaign earlier. We now need to launch by February 10th, not March 1st.
+[00:02:32] Kavya Rao: February 10th, 2027. That's about three weeks earlier. That affects the specialties data deadline too, Dev - we'd need it by mid January at the latest.
+[00:02:41] Dev Shah: Hmm. I can try. Can we launch with specialties for the top categories and fill in the rest after?
+[00:02:47] Arjun Mehta: That's possible. We'd make search fall back to category and description for contractors without specialties.
+[00:02:53] Rachel Kim: Let's do that.
+[00:02:55] Kavya Rao: Noted: specialties can be imported in two batches; search falls back to category and description when specialties are missing.
+[00:03:03] Arjun Mehta: Anything else changing? The map view, mobile improvements, tap-to-call, distance sorting - all still as in the proposal?
+[00:03:10] Rachel Kim: All the same. Map view still a should-have.
+[00:03:14] Dev Shah: And the search term report stays optional.
+[00:03:17] Kavya Rao: Good. So, summary of changes: AI search removed. Rating filter removed. New filter: languages spoken. New requirement, out of the original scope: get three quotes from up to three contractors, delivered by email and to the contractor dashboard - separate estimate. Launch date moved from March 1st to February 10th, 2027. Specialties import can be split into two batches with a search fallback.
+[00:03:44] Rachel Kim: That's everything.
+[00:03:46] Kavya Rao: We'll send a revised scope and a change summary by Monday.
+[00:03:50] Rachel Kim: Thanks!
