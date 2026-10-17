@@ -1,0 +1,294 @@
+{
+  "meeting_id": "meeting-a",
+  "requirements": [
+    {
+      "id": "A1",
+      "title": "Search matches contractor specialties",
+      "match": [
+        [
+          "specialt",
+          "water heater",
+          "service"
+        ],
+        [
+          "search",
+          "match",
+          "keyword"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ],
+      "priority": [
+        "must_have"
+      ]
+    },
+    {
+      "id": "A2",
+      "title": "Results sorted by distance, nearest first",
+      "match": [
+        [
+          "distance",
+          "nearest",
+          "closest"
+        ],
+        [
+          "sort",
+          "order",
+          "first",
+          "default"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ],
+      "feasibility": [
+        "existing_configuration",
+        "existing_with_limitation"
+      ]
+    },
+    {
+      "id": "A3",
+      "title": "Search filters (category, radius, licensed & insured, 24/7)",
+      "match": [
+        [
+          "filter"
+        ],
+        [
+          "licens",
+          "24/7",
+          "emergency",
+          "radius"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ],
+      "text_all": [
+        [
+          "licens"
+        ],
+        [
+          "24/7",
+          "emergency"
+        ],
+        [
+          "radius",
+          "mile"
+        ]
+      ]
+    },
+    {
+      "id": "A4",
+      "title": "Mobile search experience",
+      "match": [
+        [
+          "mobile",
+          "phone"
+        ],
+        [
+          "search",
+          "filter",
+          "sticky",
+          "result"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "A5",
+      "title": "Tap-to-call on result cards",
+      "match": [
+        [
+          "call"
+        ],
+        [
+          "tap",
+          "button",
+          "click"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "A6",
+      "title": "Map view of results (should-have)",
+      "match": [
+        [
+          "map"
+        ]
+      ],
+      "priority": [
+        "should_have"
+      ],
+      "feasibility": [
+        "existing_with_limitation",
+        "existing_configuration"
+      ]
+    },
+    {
+      "id": "A7",
+      "title": "Licensed & insured badge, manual verification",
+      "match": [
+        [
+          "licens"
+        ],
+        [
+          "badge",
+          "verif",
+          "manual"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "A8",
+      "title": "AI natural-language search stays optional/unclear",
+      "match": [
+        [
+          "natural",
+          "language model",
+          "ai search",
+          "ai-powered",
+          "ai "
+        ]
+      ],
+      "not_confirmed_must": true
+    },
+    {
+      "id": "A9",
+      "title": "Search term / zero-result reporting is optional",
+      "match": [
+        [
+          "search term",
+          "zero-result",
+          "zero result",
+          "no-result",
+          "no result",
+          "what people search"
+        ]
+      ],
+      "not_confirmed_must": true
+    },
+    {
+      "id": "A10",
+      "title": "Predictive suggestions as you type",
+      "match": [
+        [
+          "predict",
+          "suggest",
+          "autocomplete",
+          "as you type"
+        ]
+      ],
+      "feasibility": [
+        "existing_configuration",
+        "existing_with_limitation"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "A-K1",
+      "title": "Go-live deadline (March 1st) captured",
+      "fields": [
+        "constraints"
+      ],
+      "all": [
+        [
+          "march"
+        ],
+        [
+          "1"
+        ]
+      ]
+    },
+    {
+      "id": "A-K2",
+      "title": "Budget ($8-10k) captured",
+      "fields": [
+        "constraints"
+      ],
+      "all": [
+        [
+          "8"
+        ],
+        [
+          "10"
+        ]
+      ]
+    },
+    {
+      "id": "A-K3",
+      "title": "No visual redesign recorded as out of scope",
+      "fields": [
+        "exclusions",
+        "scope_exclusions",
+        "decisions"
+      ],
+      "all": [
+        [
+          "redesign"
+        ]
+      ]
+    },
+    {
+      "id": "A-K4",
+      "title": "Automatic state-board licence check excluded",
+      "fields": [
+        "exclusions",
+        "scope_exclusions"
+      ],
+      "all": [
+        [
+          "state",
+          "automatic",
+          "cslb"
+        ]
+      ]
+    },
+    {
+      "id": "A-K5",
+      "title": "Client supplies specialties data",
+      "fields": [
+        "client_responsibilities",
+        "commitments"
+      ],
+      "all": [
+        [
+          "specialt"
+        ]
+      ]
+    },
+    {
+      "id": "A-K6",
+      "title": "Rating filter left undecided (not a confirmed deliverable)",
+      "type": "rating_undecided"
+    },
+    {
+      "id": "A-K7",
+      "title": "Call tracking not priced as a deliverable",
+      "type": "not_in_deliverables",
+      "terms": [
+        "call tracking",
+        "track calls",
+        "tracking calls",
+        "call-tracking"
+      ]
+    }
+  ],
+  "reference_estimate": {
+    "likely_hours": 85,
+    "range": [
+      55,
+      130
+    ],
+    "note": "Reference band prepared by the project author from the transcript (configuration items 1-4 h, custom UI/backend work 8-30 h, testing and PM on top). Adjust to your own delivery judgement before reporting; the eval only checks the agent lands inside the band."
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "meeting_id": "meeting-c",
+  "baseline_meeting": "meeting-a",
+  "changes": [
+    {
+      "id": "C1",
+      "title": "AI search removed",
+      "type": "removed",
+      "terms": [
+        "ai",
+        "natural"
+      ]
+    },
+    {
+      "id": "C2",
+      "title": "Languages-spoken filter captured (added or as a filter modification)",
+      "type": "added_or_modified",
+      "terms": [
+        "language"
+      ]
+    },
+    {
+      "id": "C3",
+      "title": "Rating filter dropped",
+      "type": "any_change_mentions",
+      "terms": [
+        "rating"
+      ]
+    },
+    {
+      "id": "C4",
+      "title": "Get-three-quotes added and flagged out of scope",
+      "type": "added_out_of_scope",
+      "terms": [
+        "quote"
+      ]
+    },
+    {
+      "id": "C5",
+      "title": "Launch moved from March 1st to February 10th",
+      "type": "schedule",
+      "before": [
+        "mar"
+      ],
+      "after": [
+        "feb",
+        "10"
+      ]
+    },
+    {
+      "id": "C6",
+      "title": "No false removals (map, mobile, distance, tap-to-call, licence badge stay)",
+      "type": "no_false_removals",
+      "protected": [
+        "map",
+        "mobile",
+        "distance",
+        "tap",
+        "call",
+        "licens",
+        "24/7"
+      ]
+    },
+    {
+      "id": "C7",
+      "title": "Unchanged deliverables keep their approved estimates",
+      "type": "kept_verbatim"
+    },
+    {
+      "id": "C8",
+      "title": "Revision needs its own approval before sending",
+      "type": "approval_gate"
+    }
+  ]
+}

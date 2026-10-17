@@ -1,0 +1,228 @@
+{
+  "meeting_id": "meeting-b",
+  "requirements": [
+    {
+      "id": "B1",
+      "title": "Stripe card payments on site",
+      "match": [
+        [
+          "stripe"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ],
+      "feasibility": [
+        "existing_configuration",
+        "existing_with_limitation"
+      ]
+    },
+    {
+      "id": "B2",
+      "title": "Apple Pay (should-have)",
+      "match": [
+        [
+          "apple pay"
+        ]
+      ]
+    },
+    {
+      "id": "B3",
+      "title": "Square stays open / to be checked",
+      "match": [
+        [
+          "square"
+        ]
+      ],
+      "not_confirmed_must": true
+    },
+    {
+      "id": "B4",
+      "title": "Monthly and annual plans, annual discounted",
+      "match": [
+        [
+          "monthly"
+        ],
+        [
+          "annual",
+          "yearly"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "B5",
+      "title": "Coupon code for new members' first payment",
+      "match": [
+        [
+          "coupon",
+          "discount code",
+          "promo"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "B6",
+      "title": "Admin notifications for signups, renewals, failed renewals",
+      "match": [
+        [
+          "notif",
+          "email",
+          "alert"
+        ],
+        [
+          "renewal",
+          "signup",
+          "sign-up",
+          "joins",
+          "failed"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "B7",
+      "title": "Branded member receipt",
+      "match": [
+        [
+          "receipt"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ]
+    },
+    {
+      "id": "B8",
+      "title": "Booth reservations with limited inventory",
+      "match": [
+        [
+          "booth"
+        ]
+      ],
+      "status": [
+        "confirmed"
+      ],
+      "feasibility": [
+        "custom_development",
+        "needs_clarification",
+        "existing_with_limitation"
+      ]
+    },
+    {
+      "id": "B9",
+      "title": "Abandoned checkout reminders are optional",
+      "match": [
+        [
+          "abandon",
+          "unfinished",
+          "didn't finish",
+          "incomplete",
+          "reminder"
+        ]
+      ],
+      "not_confirmed_must": true
+    },
+    {
+      "id": "B10",
+      "title": "Members can download invoices",
+      "match": [
+        [
+          "invoice"
+        ]
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-K1",
+      "title": "Hard deadline January 15th captured",
+      "fields": [
+        "constraints"
+      ],
+      "all": [
+        [
+          "jan"
+        ],
+        [
+          "15"
+        ]
+      ]
+    },
+    {
+      "id": "B-K2",
+      "title": "PayPal recurring-subscription migration flagged as a risk/question",
+      "fields": [
+        "risks",
+        "open_questions",
+        "scope_open_questions"
+      ],
+      "all": [
+        [
+          "paypal"
+        ],
+        [
+          "subscri",
+          "recurring",
+          "renewal",
+          "migrat"
+        ]
+      ]
+    },
+    {
+      "id": "B-K3",
+      "title": "Client sets up and verifies the Stripe account",
+      "fields": [
+        "client_responsibilities",
+        "commitments"
+      ],
+      "all": [
+        [
+          "stripe"
+        ]
+      ]
+    },
+    {
+      "id": "B-K4",
+      "title": "Sales tax left as an open question",
+      "fields": [
+        "open_questions",
+        "scope_open_questions",
+        "risks"
+      ],
+      "all": [
+        [
+          "tax"
+        ]
+      ]
+    },
+    {
+      "id": "B-K5",
+      "title": "Board approval above $5,000 captured",
+      "fields": [
+        "constraints",
+        "decisions"
+      ],
+      "all": [
+        [
+          "board"
+        ]
+      ]
+    }
+  ],
+  "reference_estimate": {
+    "likely_hours": 90,
+    "range": [
+      50,
+      140
+    ],
+    "note": "Reference band prepared by the project author from the transcript (configuration items 1-4 h, custom UI/backend work 8-30 h, testing and PM on top). Adjust to your own delivery judgement before reporting; the eval only checks the agent lands inside the band."
+  }
+}
