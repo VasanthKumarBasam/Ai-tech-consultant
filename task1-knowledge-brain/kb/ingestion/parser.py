@@ -27,7 +27,8 @@ NOISE_SELECTORS = [
     "[class*=article-meta]", "[class*=feedback]", "[class*=attachments]",
 ]
 BODY_SELECTORS = ["#article-body", ".article-body", "[itemprop=articleBody]", ".fr-view", "article", "main"]
-TITLE_SELECTORS = ["h1.article-title", ".article-title h1", ".article-title", "h2.heading", "h1.heading", "h1"]
+TITLE_SELECTORS = ["h1.article-title", ".article-title h1", ".article-title", ".article-view h2.heading", "h2.heading", "h1.heading"]
+SITE_SUFFIXES = re.compile(r"\s*[|:]\s*(Brilliant Directories.*|Solution Center.*|Support.*)$", re.I)
 
 
 @dataclass
@@ -270,15 +271,18 @@ def _largest_text_block(soup: BeautifulSoup) -> Tag | None:
 
 
 def extract_title(soup: BeautifulSoup) -> str:
+    """Article-specific selectors first, then <title>/og:title (minus the site suffix), then any <h1>."""
     el = _pick(soup, TITLE_SELECTORS)
     if el:
         return _clean(el.get_text(" "))
     og = soup.find("meta", attrs={"property": "og:title"})
-    if og and og.get("content"):
-        return _clean(og["content"].split("|")[0])
-    if soup.title and soup.title.string:
-        return _clean(soup.title.string.split("|")[0])
-    return "Untitled"
+    for raw in (og.get("content") if og else None, soup.title.string if soup.title else None):
+        if raw:
+            t = SITE_SUFFIXES.sub("", _clean(raw)).strip()
+            if t:
+                return t
+    h1 = soup.find("h1")
+    return _clean(h1.get_text(" ")) if h1 else "Untitled"
 
 
 def parse_article(html: str, url: str, article_id: str | None = None) -> Article:

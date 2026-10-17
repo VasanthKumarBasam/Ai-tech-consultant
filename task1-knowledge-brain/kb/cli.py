@@ -1,6 +1,7 @@
 """Command line: python -m kb.cli <command>
 
   ingest [--mode incremental|full|rebuild] [--limit N] [--url URL ...]
+  inspect URL                fetch + parse one live article and print what would be indexed (no writes)
   status                     crawl manifest + last run
   ask "question" [--mode hybrid] [--model ID]
   rollback RUN_ID
@@ -23,6 +24,8 @@ def main(argv: list[str] | None = None) -> int:
     pi.add_argument("--mode", default="incremental", choices=["incremental", "full", "rebuild"])
     pi.add_argument("--limit", type=int)
     pi.add_argument("--url", action="append")
+    pin = sub.add_parser("inspect")
+    pin.add_argument("url")
     sub.add_parser("status")
     pa = sub.add_parser("ask")
     pa.add_argument("question")
@@ -42,6 +45,9 @@ def main(argv: list[str] | None = None) -> int:
 
         uvicorn.run("kb.api:app", host=args.host, port=args.port)
         return 0
+
+    if args.cmd == "inspect":
+        return asyncio.run(_inspect(args.url))
 
     from .services import build_services
 
@@ -76,6 +82,32 @@ def main(argv: list[str] | None = None) -> int:
         print(f"re-embedded {svc.store.reindex()} chunks with {svc.store.embedder.name}")
         return 0
     return 1
+
+
+async def _inspect(url: str) -> int:
+    from .config import get_settings
+    from .ingestion.crawler import Fetcher
+    from .ingestion.parser import parse_article
+    from .ingestion.sitemap import article_id_from_url
+    from .retrieval.chunking import chunk_article
+
+    s = get_settings()
+    async with Fetcher(s) as f:
+        res = await f.get(url)
+    if not res.ok:
+        print(f"fetch failed: {res.status} {res.error}")
+        return 1
+    a = parse_article(res.text, url, article_id_from_url(url))
+    print(f"title: {a.title}\nmodified: {a.modified_on_text}\nhash: {a.content_hash[:16]}")
+    for sec in a.sections:
+        print(f"\n## {sec.heading}  ({len(sec.blocks)} blocks)")
+        print(sec.text[:600])
+    print(f"\nimages ({len(a.images)}):")
+    for i in a.images:
+        print(f"  {i.ref} [{i.section}] {i.url[:100]}\n      before: ...{i.context_before[-90:]!r}")
+    chunks = chunk_article(a, s.chunk_strategy, s.chunk_max_chars, s.chunk_min_chars, s.chunk_overlap_chars)
+    print(f"\n{len(chunks)} chunks: " + ", ".join(f"{c.section[:30]} ({len(c.text)} chars)" for c in chunks))
+    return 0
 
 
 if __name__ == "__main__":
