@@ -49,3 +49,4 @@ task3-meeting-to-scope/  scope/ (agents, orchestrator, store, api) · transcript
 shared-docs/             API contract, demo script
 ```
 Email delivery and "send to client" are **simulated** (saved to `data/outbox/*.eml` and `data/sent/*.md`).
+# Ai-tech-consultant
